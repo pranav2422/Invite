@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vastu Shanti Invitation</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    overflow: hidden;
+}
+
+/* Background video */
+video {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+/* Entry Screen */
+#entryScreen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #4a2c2a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.tap-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #ff7043;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+/* Main Content */
+#mainContent {
+    display: none;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* House Image */
+.house-img {
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;
+    margin: 15px 0;
+    animation: zoomIn 2s ease;
+}
+
+@keyframes zoomIn {
+    from {transform: scale(0.8); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+}
+
+/* Diya */
+.diya {
+    font-size: 60px;
+    animation: glow 1.5s infinite alternate;
+}
+@keyframes glow {
+    from {transform: scale(1);}
+    to {transform: scale(1.1);}
+}
+
+/* Card */
+.card {
+    background: rgba(255,255,255,0.9);
+    color: black;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 350px;
+}
+
+/* Buttons */
+.btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    background: #ff7043;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+}
+
+/* Flowers */
+.flower {
+    position: fixed;
+    top: -50px;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Video -->
+<video autoplay muted loop>
+  <source src="https://cdn.coverr.co/videos/coverr-burning-candle-1562/1080p.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- Entry Screen -->
+<div id="entryScreen">
+    <h1>🪔 Vastu Shanti Invitation 🪔</h1>
+    <div class="tap-btn" onclick="openInvite()">Tap to Open</div>
+</div>
+
+<!-- Main Content -->
+<div id="mainContent">
+
+<div class="diya">🪔</div>
+
+<h2>🙏 Shree Ganeshay Namah 🙏</h2>
+
+<!-- 🏠 YOUR HOUSE IMAGE -->
+<img src="house.jpg" alt="Our Home" class="house-img">
+
+<div class="card">
+    <h2>Vastu Shanti Pooja</h2>
+
+    <p>
+        With the blessings of God & elders,<br>
+        we invite you to our new home 🏠
+    </p>
+
+    <p><b>Date:</b> 25 December 2026</p>
+    <p><b>Time:</b> 10:00 AM onwards</p>
+
+    <p><b>Venue:</b><br>Your Address Here</p>
+
+    <div id="countdown"></div>
+
+    <!-- Map -->
+    <a class="btn" href="https://maps.google.com" target="_blank">
+        📍 View Location
+    </a>
+
+    <!-- WhatsApp RSVP -->
+    <a class="btn" 
+       href="https://wa.me/91XXXXXXXXXX?text=Hi,%20I%20will%20attend%20the%20Vastu%20Shanti%20Pooja%20🙏" 
+       target="_blank">
+        📲 RSVP on WhatsApp
+    </a>
+
+</div>
+
+<p>We look forward to celebrating with you 🙏</p>
+
+</div>
+
+<script>
+function openInvite() {
+    document.getElementById("entryScreen").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+
+    // Floating flowers
+    for(let i=0;i<20;i++){
+        let flower = document.createElement("div");
+        flower.className = "flower";
+        flower.innerHTML = "🌸";
+        flower.style.left = Math.random()*100 + "vw";
+        flower.style.animationDuration = (3 + Math.random()*5) + "s";
+        document.body.appendChild(flower);
+    }
+}
+
+// Countdown
+var eventDate = new Date("Dec 25, 2026 10:00:00").getTime();
+
+setInterval(function() {
+    var now = new Date().getTime();
+    var distance = eventDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+
+    document.getElementById("countdown").innerHTML =
+        "⏳ " + days + " days " + hours + " hrs left";
+
+}, 1000);
+</script>
+
+</body>
+</html>
