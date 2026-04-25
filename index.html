@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Vastu Shanti Invitation - Disale Family</title>
 
@@ -13,152 +13,195 @@
 <meta property="og:url" content="https://pranav2422.github.io/Invite/">
 <meta property="og:type" content="website">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #fdf6ec;
+:root{
+  --gold:#d4af37;
+  --bg:#f7efe3;
+  --ink:#2b2b2b;
+  --muted:#6b6b6b;
+  --card:#fffaf2;
+  --ease:cubic-bezier(.22,.61,.36,1);
 }
 
-/* ENTRY */
-#entry {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #fdf6ec, #f3e0c7);
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  -webkit-tap-highlight-color: transparent;
 }
 
-.entry-card {
-    text-align: center;
-    padding: 30px;
-    border-radius: 16px;
-    max-width: 320px;
-    position: relative;
-    background: rgba(255,255,255,0.85);
-    border: 1px solid #e0c097;
+/* ---------- CINEMATIC ENTRY ---------- */
+#entry{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  background: radial-gradient(1200px 600px at 50% 120%, #ead8b9 0%, transparent 60%),
+              linear-gradient(180deg, #f7efe3, #efe1c7);
 }
 
-/* FLORAL SVG CORNERS */
-.corner {
-    position: absolute;
-    width: 60px;
-    opacity: 0.6;
+/* soft vignette */
+#entry::after{
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(circle at 50% 40%, transparent 55%, rgba(0,0,0,.25) 100%);
+  pointer-events:none;
 }
 
-.top-left { top: -10px; left: -10px; }
-.top-right { top: -10px; right: -10px; transform: rotate(90deg); }
-.bottom-left { bottom: -10px; left: -10px; transform: rotate(-90deg); }
-.bottom-right { bottom: -10px; right: -10px; transform: rotate(180deg); }
-
-.ganpati {
-    font-size: 24px;
-    margin-bottom: 10px;
-    opacity: 0.8;
+/* subtle particles */
+.particles span{
+  position:absolute;
+  width:4px;height:4px;border-radius:50%;
+  background:rgba(212,175,55,.35);
+  filter:blur(.5px);
+  animation: float 8s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(20px);opacity:0}
+  20%{opacity:.6}
+  100%{transform:translateY(-120vh);opacity:0}
 }
 
-.title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: #8b0000;
+/* card */
+.entry-card{
+  position:relative;
+  width:min(92vw,360px);
+  padding:28px 26px 30px;
+  border-radius:18px;
+  background:rgba(255,255,255,.88);
+  backdrop-filter: blur(8px);
+  border:1px solid rgba(212,175,55,.35);
+  box-shadow:0 30px 60px rgba(0,0,0,.12);
+  transform:translateY(20px) scale(.98);
+  opacity:0;
+  animation:cardIn .9s var(--ease) forwards .25s;
+}
+@keyframes cardIn{
+  to{transform:none;opacity:1}
 }
 
-.tap-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    border: 1px solid #b68d40;
-    border-radius: 25px;
-    cursor: pointer;
+/* corners (SVG) */
+.corner{position:absolute;width:58px;opacity:.6}
+.tl{top:-10px;left:-10px}
+.tr{top:-10px;right:-10px;transform:rotate(90deg)}
+.bl{bottom:-10px;left:-10px;transform:rotate(-90deg)}
+.br{bottom:-10px;right:-10px;transform:rotate(180deg)}
+
+/* ganpati */
+.ganpati{
+  width:86px; margin:6px auto 10px; display:block;
+  opacity:0; transform:scale(.92);
+  animation:ganIn 1.2s var(--ease) forwards .5s, glow 3s ease-in-out infinite 1.6s;
+}
+@keyframes ganIn{to{opacity:1;transform:scale(1)}}
+@keyframes glow{
+  0%,100%{filter:drop-shadow(0 0 2px rgba(212,175,55,.3))}
+  50%{filter:drop-shadow(0 0 12px rgba(212,175,55,.8))}
 }
 
-/* DOOR */
-#door {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display: none;
-    z-index: 10;
+/* text */
+.title{
+  font-family:"Playfair Display", serif;
+  font-size:22px; letter-spacing:.4px;
+  text-align:center; margin:6px 0 4px;
+}
+.sub{
+  text-align:center; color:var(--muted);
+  margin:0 0 14px; font-size:13px;
 }
 
-.panel {
-    width: 50%;
-    height: 100%;
-    float: left;
-    background: linear-gradient(#5a3e2b, #2c1b12);
-    transition: transform 1.5s ease-in-out;
+/* button */
+.cta{
+  display:block; margin:14px auto 0;
+  padding:10px 18px; border-radius:999px;
+  border:1px solid var(--gold);
+  background:linear-gradient(180deg, #fff, #f6e8c7);
+  cursor:pointer; text-align:center;
+  transition:transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.cta:active{ transform:scale(.97) }
+
+/* ---------- DOOR ---------- */
+#door{
+  position:fixed; inset:0; display:none; z-index:10; overflow:hidden;
+}
+.panel{
+  position:absolute; top:0; width:50%; height:100%;
+  background:linear-gradient(#5a3e2b, #2c1b12);
+  transition:transform 1.4s var(--ease);
+}
+.left{left:0} .right{right:0}
+.open .left{transform:translateX(-100%)}
+.open .right{transform:translateX(100%)}
+.light{
+  position:absolute; inset:0;
+  background:radial-gradient(circle at 50% 50%, rgba(255,235,170,.6), transparent 60%);
+  opacity:0; transition:opacity 1s var(--ease);
+}
+.open .light{opacity:1}
+
+/* ---------- MAIN ---------- */
+#main{display:none; padding:22px 16px 30px}
+
+.card{
+  margin:auto; width:min(92vw,420px);
+  background:var(--card);
+  border-radius:20px;
+  border:1px solid rgba(212,175,55,.35);
+  box-shadow:0 20px 50px rgba(0,0,0,.12);
+  overflow:hidden;
+  transform:translateY(14px); opacity:0;
+  animation:rise .7s var(--ease) forwards .15s;
+}
+@keyframes rise{to{transform:none;opacity:1}}
+
+/* gallery */
+.gallery{
+  position:relative; width:100%; aspect-ratio:4/3; overflow:hidden;
+  background:#000;
+}
+.slide{
+  position:absolute; inset:0;
+  opacity:0; transform:scale(1);
+  transition:opacity .9s var(--ease), transform 8s linear;
+}
+.slide.active{opacity:1; transform:scale(1.08)} /* Ken Burns */
+.slide img{
+  width:100%; height:100%;
+  object-fit:contain; /* no cropping */
 }
 
-.open .left { transform: translateX(-100%); }
-.open .right { transform: translateX(100%); }
-
-.light {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(255,223,150,0.5), transparent);
-    opacity: 0;
-    transition: opacity 1s;
+/* content */
+.content{padding:18px 18px 20px; text-align:center}
+.h2{
+  font-family:"Playfair Display", serif;
+  font-size:24px; margin:4px 0 8px;
+}
+.p{color:var(--muted); line-height:1.6; margin:6px 0}
+.meta{margin-top:10px}
+.btn{
+  margin-top:14px; display:inline-block;
+  padding:10px 16px; border-radius:999px;
+  border:1px solid var(--gold);
+  text-decoration:none; color:var(--ink);
+  background:linear-gradient(180deg, #fff, #f6e8c7);
 }
 
-.open .light { opacity: 1; }
-
-/* MAIN */
-#main {
-    display: none;
-    padding: 20px;
+/* subtle tilt on move (desktop) */
+.tilt{
+  transform-style:preserve-3d;
+  transition:transform .2s var(--ease);
 }
 
-.card {
-    max-width: 380px;
-    margin: auto;
-    background: #fffaf3;
-    border-radius: 15px;
-    padding: 20px;
-    border: 1px solid #e0c097;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-/* SLIDER */
-.slider {
-    position: relative;
-    height: 220px;
-    overflow: hidden;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.slider img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    position: absolute;
-    opacity: 0;
-    transform: scale(1);
-    transition: opacity 1s, transform 6s;
-}
-
-.slider img.active {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-.details {
-    color: #444;
-    line-height: 1.6;
-    margin-top: 10px;
-}
-
-.btn {
-    margin-top: 15px;
-    padding: 10px;
-    border: 1px solid #b68d40;
-    border-radius: 25px;
-    display: inline-block;
-    text-decoration: none;
-    color: #000;
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important}
 }
 </style>
 </head>
@@ -171,111 +214,116 @@ body {
 
 <!-- ENTRY -->
 <div id="entry">
-    <div class="entry-card">
+  <!-- particles -->
+  <div class="particles">
+    <!-- few spans for sparkle -->
+    <span style="left:10%; animation-delay:0s"></span>
+    <span style="left:30%; animation-delay:1s"></span>
+    <span style="left:55%; animation-delay:2s"></span>
+    <span style="left:75%; animation-delay:.5s"></span>
+    <span style="left:85%; animation-delay:1.5s"></span>
+  </div>
 
-        <!-- SVG CORNERS -->
-        <img src="corner.svg" class="corner top-left">
-        <img src="corner.svg" class="corner top-right">
-        <img src="corner.svg" class="corner bottom-left">
-        <img src="corner.svg" class="corner bottom-right">
+  <div class="entry-card tilt" id="entryCard">
+    <img src="corner.svg" class="corner tl">
+    <img src="corner.svg" class="corner tr">
+    <img src="corner.svg" class="corner bl">
+    <img src="corner.svg" class="corner br">
 
-        <div class="ganpati">ॐ</div>
-        <div class="title">Vastu Shanti Invitation</div>
-        <p>Disale Family invites you</p>
-        <div class="tap-btn" onclick="startInvite()">Tap to view invitation</div>
-    </div>
+    <img src="ganpati.jpeg" class="ganpati" alt="Ganpati">
+
+    <div class="title">Vastu Shanti Invitation</div>
+    <div class="sub">Disale Family warmly invites you</div>
+
+    <div class="cta" onclick="startInvite()">Tap for details</div>
+  </div>
 </div>
 
 <!-- DOOR -->
 <div id="door">
-    <div class="panel left"></div>
-    <div class="panel right"></div>
-    <div class="light"></div>
+  <div class="panel left"></div>
+  <div class="panel right"></div>
+  <div class="light"></div>
 </div>
 
 <!-- MAIN -->
 <div id="main">
-<div class="card">
-
-    <div class="slider" id="slider">
-        <img src="house1.jpg" class="active">
-        <img src="house2.jpg">
-        <img src="house3.jpg">
+  <div class="card">
+    <div class="gallery" id="gallery">
+      <div class="slide active"><img src="house1.jpg"></div>
+      <div class="slide"><img src="house2.jpg"></div>
+      <div class="slide"><img src="house3.jpg"></div>
     </div>
 
-    <h2 class="title">Vastu Shanti Pooja</h2>
+    <div class="content">
+      <div class="h2">Vastu Shanti Pooja</div>
+      <div class="p">With the blessings of God & elders,<br>we invite you to our new home</div>
 
-    <p class="details">
-        With the blessings of God & elders,<br>
-        we invite you to our new home
-    </p>
-
-    <p class="details">
+      <div class="p meta">
         📅 25 December 2026<br>
-        ⏰ 10:00 AM onwards
-    </p>
-
-    <p class="details">
+        ⏰ 10:00 AM onwards<br>
         📍 Your Address Here
-    </p>
+      </div>
 
-    <a class="btn" href="https://www.google.com/maps?q=your+address" target="_blank">
+      <a class="btn" href="https://www.google.com/maps?q=your+address" target="_blank">
         View Location
-    </a>
-
-</div>
+      </a>
+    </div>
+  </div>
 </div>
 
 <script>
-let slider = document.getElementById("slider");
-let slides = document.querySelectorAll(".slider img");
-let index = 0;
+/* HAPTIC + START */
+function startInvite(){
+  if(navigator.vibrate) navigator.vibrate(40);
 
-function startInvite() {
-    if (navigator.vibrate) navigator.vibrate(50);
+  document.getElementById("entry").style.display="none";
+  const door=document.getElementById("door");
+  door.style.display="block";
 
-    document.getElementById("entry").style.display = "none";
-    document.getElementById("door").style.display = "block";
+  document.getElementById("doorSound").play();
+  document.getElementById("music").play().catch(()=>{});
 
-    document.getElementById("doorSound").play();
-    document.getElementById("music").play().catch(()=>{});
+  setTimeout(()=>door.classList.add("open"), 80);
 
-    setTimeout(() => {
-        document.getElementById("door").classList.add("open");
-    }, 100);
-
-    setTimeout(() => {
-        document.getElementById("door").style.display = "none";
-        document.getElementById("main").style.display = "block";
-    }, 1600);
+  setTimeout(()=>{
+    door.style.display="none";
+    document.getElementById("main").style.display="block";
+  },1500);
 }
 
-setInterval(() => {
-    slides[index].classList.remove("active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("active");
-}, 3000);
+/* GALLERY (smooth) */
+const slides=[...document.querySelectorAll(".slide")];
+let i=0;
+setInterval(()=>{
+  slides[i].classList.remove("active");
+  i=(i+1)%slides.length;
+  slides[i].classList.add("active");
+},3500);
 
-let startX = 0;
-
-slider.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-slider.addEventListener("touchend", e => {
-    let endX = e.changedTouches[0].clientX;
-    if(startX > endX + 50) next();
-    else if(startX < endX - 50) prev();
+/* SWIPE */
+let startX=0;
+const gallery=document.getElementById("gallery");
+gallery.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+gallery.addEventListener("touchend",e=>{
+  const endX=e.changedTouches[0].clientX;
+  if(startX>endX+40) next();
+  else if(startX<endX-40) prev();
 });
+function next(){ slides[i].classList.remove("active"); i=(i+1)%slides.length; slides[i].classList.add("active"); }
+function prev(){ slides[i].classList.remove("active"); i=(i-1+slides.length)%slides.length; slides[i].classList.add("active"); }
 
-function next(){
-    slides[index].classList.remove("active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("active");
-}
+/* SUBTLE TILT (desktop) */
+const card=document.getElementById("entryCard");
+card.addEventListener("mousemove",(e)=>{
+  const r=card.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width - .5;
+  const y=(e.clientY-r.top)/r.height - .5;
+  card.style.transform=`rotateX(${ -y*6 }deg) rotateY(${ x*6 }deg)`;
+});
+card.addEventListener("mouseleave",()=>card.style.transform="");
 
-function prev(){
-    slides[index].classList.remove("active");
-    index = (index - 1 + slides.length) % slides.length;
-    slides[index].classList.add("active");
-}
+/* SAFETY: ensure no crash if elements missing */
 </script>
 
 </body>
