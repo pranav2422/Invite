@@ -8,210 +8,193 @@
 <style>
 body {
     margin: 0;
-    font-family: 'Georgia', serif;
-    overflow: hidden;
+    font-family: 'Helvetica Neue', sans-serif;
+    background: #0e0e0e;
+    color: #fff;
 }
 
-/* Background video */
-video {
+/* DOOR INTRO */
+#intro {
     position: fixed;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    z-index: -1;
-}
-
-/* Overlay */
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-}
-
-/* Entry Screen */
-#entryScreen {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: #4a2c2a;
-    color: white;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     z-index: 10;
 }
 
-.tap-btn {
-    margin-top: 20px;
-    padding: 12px 25px;
-    background: #ff7043;
-    border-radius: 30px;
-    cursor: pointer;
+.door {
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(145deg, #2b2b2b, #111);
+    transition: transform 1.5s ease-in-out;
 }
 
-/* Main Content */
-#mainContent {
-    display: none;
-    color: white;
+.open .left { transform: translateX(-100%); }
+.open .right { transform: translateX(100%); }
+
+.tap-text {
+    position: absolute;
+    width: 100%;
     text-align: center;
+    top: 60%;
+    font-size: 16px;
+    letter-spacing: 2px;
+    opacity: 0.7;
+}
+
+/* MAIN */
+#main {
+    display: none;
     padding: 20px;
-    animation: fadeIn 2s;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-/* House Image */
-.house-img {
-    width: 90%;
-    max-width: 400px;
-    border-radius: 20px;
-    margin: 15px 0;
-    animation: zoomIn 2s ease;
-}
-
-@keyframes zoomIn {
-    from {transform: scale(0.8); opacity: 0;}
-    to {transform: scale(1); opacity: 1;}
-}
-
-/* Diya */
-.diya {
-    font-size: 60px;
-    animation: glow 1.5s infinite alternate;
-}
-@keyframes glow {
-    from {transform: scale(1);}
-    to {transform: scale(1.1);}
-}
-
-/* Card */
+/* CARD */
 .card {
-    background: rgba(255,255,255,0.9);
-    color: black;
-    border-radius: 20px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 350px;
+    max-width: 420px;
+    margin: auto;
 }
 
-/* Buttons */
+/* SLIDER */
+.slider {
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.slider img {
+    width: 100%;
+    display: none;
+}
+
+.slider img.active {
+    display: block;
+}
+
+/* TEXT */
+h2 {
+    text-align: center;
+    font-weight: 500;
+}
+
+p {
+    text-align: center;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* BUTTON */
 .btn {
     display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 80%;
-    background: #ff7043;
+    margin: 20px auto;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #fff;
+    border-radius: 30px;
     color: white;
     text-decoration: none;
-    border-radius: 25px;
-}
-
-/* Flowers */
-.flower {
-    position: fixed;
-    top: -50px;
-    font-size: 20px;
-    animation: fall linear infinite;
-}
-@keyframes fall {
-    to { transform: translateY(110vh); }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Background Video -->
-<video autoplay muted loop>
-  <source src="https://cdn.coverr.co/videos/coverr-burning-candle-1562/1080p.mp4" type="video/mp4">
-</video>
+<!-- AUDIO -->
+<audio id="doorSound" src="https://assets.mixkit.co/sfx/preview/mixkit-door-opening-199.mp3"></audio>
+<audio id="bgMusic" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
 
-<div class="overlay"></div>
-
-<!-- Entry Screen -->
-<div id="entryScreen">
-    <h1>🪔 Vastu Shanti Invitation 🪔</h1>
-    <div class="tap-btn" onclick="openInvite()">Tap to Open</div>
+<!-- INTRO -->
+<div id="intro" onclick="openDoor()">
+    <div class="door left"></div>
+    <div class="door right"></div>
+    <div class="tap-text">Tap to Enter</div>
 </div>
 
-<!-- Main Content -->
-<div id="mainContent">
-
-<div class="diya">🪔</div>
-
-<h2>🙏 Shree Ganeshay Namah 🙏</h2>
-
-<!-- 🏠 YOUR HOUSE IMAGE -->
-<img src="house.jpg" alt="Our Home" class="house-img">
+<!-- MAIN -->
+<div id="main">
 
 <div class="card">
+
+    <!-- SLIDER -->
+    <div class="slider" id="slider">
+        <img src="house1.jpg" class="active">
+        <img src="house2.jpg">
+        <img src="house3.jpg">
+    </div>
+
     <h2>Vastu Shanti Pooja</h2>
 
     <p>
         With the blessings of God & elders,<br>
-        we invite you to our new home 🏠
+        we invite you to our new home
     </p>
 
-    <p><b>Date:</b> 25 December 2026</p>
-    <p><b>Time:</b> 10:00 AM onwards</p>
+    <p>
+        25 December 2026<br>
+        10:00 AM onwards
+    </p>
 
-    <p><b>Venue:</b><br>Your Address Here</p>
+    <p>
+        Your Address Here
+    </p>
 
-    <div id="countdown"></div>
-
-    <!-- Map -->
     <a class="btn" href="https://maps.google.com" target="_blank">
-        📍 View Location
-    </a>
-
-    <!-- WhatsApp RSVP -->
-    <a class="btn" 
-       href="https://wa.me/91XXXXXXXXXX?text=Hi,%20I%20will%20attend%20the%20Vastu%20Shanti%20Pooja%20🙏" 
-       target="_blank">
-        📲 RSVP on WhatsApp
+        View Location
     </a>
 
 </div>
-
-<p>We look forward to celebrating with you 🙏</p>
 
 </div>
 
 <script>
-function openInvite() {
-    document.getElementById("entryScreen").style.display = "none";
-    document.getElementById("mainContent").style.display = "block";
+function openDoor() {
+    document.getElementById("intro").classList.add("open");
 
-    // Floating flowers
-    for(let i=0;i<20;i++){
-        let flower = document.createElement("div");
-        flower.className = "flower";
-        flower.innerHTML = "🌸";
-        flower.style.left = Math.random()*100 + "vw";
-        flower.style.animationDuration = (3 + Math.random()*5) + "s";
-        document.body.appendChild(flower);
-    }
+    document.getElementById("doorSound").play();
+    document.getElementById("bgMusic").play();
+
+    setTimeout(() => {
+        document.getElementById("intro").style.display = "none";
+        document.getElementById("main").style.display = "block";
+    }, 1500);
 }
 
-// Countdown
-var eventDate = new Date("Dec 25, 2026 10:00:00").getTime();
+/* AUTO SLIDE */
+let slides = document.querySelectorAll(".slider img");
+let index = 0;
 
-setInterval(function() {
-    var now = new Date().getTime();
-    var distance = eventDate - now;
+setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}, 3000);
 
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+/* SWIPE SUPPORT */
+let startX = 0;
 
-    document.getElementById("countdown").innerHTML =
-        "⏳ " + days + " days " + hours + " hrs left";
+document.getElementById("slider").addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
 
-}, 1000);
+document.getElementById("slider").addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+
+    if(startX > endX + 50){
+        nextSlide();
+    } else if(startX < endX - 50){
+        prevSlide();
+    }
+});
+
+function nextSlide(){
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}
+
+function prevSlide(){
+    slides[index].classList.remove("active");
+    index = (index - 1 + slides.length) % slides.length;
+    slides[index].classList.add("active");
+}
 </script>
 
 </body>
