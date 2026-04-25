@@ -3,44 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vastu Shanti Invitation</title>
+
+<title>Vastu Shanti Invitation - Disale Family</title>
+
+<!-- WhatsApp Preview -->
+<meta property="og:title" content="Vastu Shanti Invitation - Disale Family">
+<meta property="og:description" content="You are warmly invited to our new home Vastu Shanti Pooja">
+<meta property="og:image" content="https://pranav2422.github.io/Invite/preview.jpeg">
+<meta property="og:url" content="https://pranav2422.github.io/Invite/">
+<meta property="og:type" content="website">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
-    font-family: 'Helvetica Neue', sans-serif;
-    background: #0e0e0e;
-    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    background: #fdf6ec;
 }
 
-/* DOOR INTRO */
-#intro {
+/* ENTRY */
+#entry {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #fdf6ec, #f3e0c7);
+}
+
+.entry-card {
+    text-align: center;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 320px;
+    position: relative;
+}
+
+.entry-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 1px;
+    background: linear-gradient(45deg, gold, transparent, gold);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    animation: borderGlow 4s linear infinite;
+}
+
+@keyframes borderGlow {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.5); }
+    100% { filter: brightness(1); }
+}
+
+.ganpati {
+    font-size: 24px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #8b0000;
+}
+
+.tap-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 1px solid #b68d40;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+/* DOOR */
+#door {
     position: fixed;
     width: 100%;
     height: 100%;
-    display: flex;
+    display: none;
     z-index: 10;
 }
 
-.door {
+.panel {
     width: 50%;
     height: 100%;
-    background: linear-gradient(145deg, #2b2b2b, #111);
+    float: left;
+    background: linear-gradient(#5a3e2b, #2c1b12);
     transition: transform 1.5s ease-in-out;
 }
 
 .open .left { transform: translateX(-100%); }
 .open .right { transform: translateX(100%); }
 
-.tap-text {
+.light {
     position: absolute;
     width: 100%;
-    text-align: center;
-    top: 60%;
-    font-size: 16px;
-    letter-spacing: 2px;
-    opacity: 0.7;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,223,150,0.5), transparent);
+    opacity: 0;
+    transition: opacity 1s;
 }
+
+.open .light { opacity: 1; }
 
 /* MAIN */
 #main {
@@ -48,49 +116,55 @@ body {
     padding: 20px;
 }
 
-/* CARD */
 .card {
-    max-width: 420px;
+    max-width: 380px;
     margin: auto;
+    background: #fffaf3;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #e0c097;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 /* SLIDER */
 .slider {
+    position: relative;
+    height: 220px;
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
 .slider img {
     width: 100%;
-    display: none;
+    height: 220px;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transform: scale(1);
+    transition: opacity 1s, transform 6s;
 }
 
 .slider img.active {
-    display: block;
+    opacity: 1;
+    transform: scale(1.1);
 }
 
-/* TEXT */
-h2 {
-    text-align: center;
-    font-weight: 500;
-}
-
-p {
-    text-align: center;
-    color: #ccc;
+.details {
+    color: #444;
     line-height: 1.6;
+    margin-top: 10px;
 }
 
-/* BUTTON */
 .btn {
-    display: block;
-    margin: 20px auto;
-    padding: 12px;
-    text-align: center;
-    border: 1px solid #fff;
-    border-radius: 30px;
-    color: white;
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #b68d40;
+    border-radius: 25px;
+    display: inline-block;
     text-decoration: none;
+    color: #000;
 }
 </style>
 </head>
@@ -99,65 +173,82 @@ p {
 
 <!-- AUDIO -->
 <audio id="doorSound" src="https://assets.mixkit.co/sfx/preview/mixkit-door-opening-199.mp3"></audio>
-<audio id="bgMusic" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
+<audio id="music" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
 
-<!-- INTRO -->
-<div id="intro" onclick="openDoor()">
-    <div class="door left"></div>
-    <div class="door right"></div>
-    <div class="tap-text">Tap to Enter</div>
+<!-- ENTRY -->
+<div id="entry">
+    <div class="entry-card">
+        <div class="ganpati">ॐ</div>
+        <div class="title">Vastu Shanti Invitation</div>
+        <p>Disale Family invites you</p>
+        <div class="tap-btn" onclick="startInvite()">Tap to view invitation</div>
+    </div>
+</div>
+
+<!-- DOOR -->
+<div id="door">
+    <div class="panel left"></div>
+    <div class="panel right"></div>
+    <div class="light"></div>
 </div>
 
 <!-- MAIN -->
 <div id="main">
-
 <div class="card">
 
-    <!-- SLIDER -->
     <div class="slider" id="slider">
         <img src="house1.jpg" class="active">
         <img src="house2.jpg">
         <img src="house3.jpg">
     </div>
 
-    <h2>Vastu Shanti Pooja</h2>
+    <h2 class="title">Vastu Shanti Pooja</h2>
 
-    <p>
+    <p class="details">
         With the blessings of God & elders,<br>
         we invite you to our new home
     </p>
 
-    <p>
-        25 December 2026<br>
-        10:00 AM onwards
+    <p class="details">
+        📅 14 May 2026<br>
+        ⏰ 10:00 AM onwards
     </p>
 
-    <p>
-        Your Address Here
+    <p class="details">
+        📍 Shantinagar, Shahupuri Satara
     </p>
 
-    <a class="btn" href="https://maps.google.com" target="_blank">
+    <a class="btn" href="https://www.google.com/maps?q=your+address" target="_blank">
         View Location
     </a>
 
 </div>
-
 </div>
 
 <script>
-function openDoor() {
-    document.getElementById("intro").classList.add("open");
+function startInvite() {
+
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+
+    document.getElementById("entry").style.display = "none";
+    document.getElementById("door").style.display = "block";
 
     document.getElementById("doorSound").play();
-    document.getElementById("bgMusic").play();
+
+    document.getElementById("music").play().catch(()=>{});
 
     setTimeout(() => {
-        document.getElementById("intro").style.display = "none";
+        document.getElementById("door").classList.add("open");
+    }, 100);
+
+    setTimeout(() => {
+        document.getElementById("door").style.display = "none";
         document.getElementById("main").style.display = "block";
-    }, 1500);
+    }, 1600);
 }
 
-/* AUTO SLIDE */
 let slides = document.querySelectorAll(".slider img");
 let index = 0;
 
@@ -167,30 +258,21 @@ setInterval(() => {
     slides[index].classList.add("active");
 }, 3000);
 
-/* SWIPE SUPPORT */
 let startX = 0;
-
-document.getElementById("slider").addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-});
-
-document.getElementById("slider").addEventListener("touchend", e => {
+slider.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+slider.addEventListener("touchend", e => {
     let endX = e.changedTouches[0].clientX;
-
-    if(startX > endX + 50){
-        nextSlide();
-    } else if(startX < endX - 50){
-        prevSlide();
-    }
+    if(startX > endX + 50) next();
+    else if(startX < endX - 50) prev();
 });
 
-function nextSlide(){
+function next(){
     slides[index].classList.remove("active");
     index = (index + 1) % slides.length;
     slides[index].classList.add("active");
 }
 
-function prevSlide(){
+function prev(){
     slides[index].classList.remove("active");
     index = (index - 1 + slides.length) % slides.length;
     slides[index].classList.add("active");
