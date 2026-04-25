@@ -34,30 +34,24 @@ body {
 .entry-card {
     text-align: center;
     padding: 30px;
-    border-radius: 12px;
+    border-radius: 16px;
     max-width: 320px;
     position: relative;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #e0c097;
 }
 
-.entry-card::before {
-    content: "";
+/* FLORAL SVG CORNERS */
+.corner {
     position: absolute;
-    inset: 0;
-    border-radius: 12px;
-    padding: 1px;
-    background: linear-gradient(45deg, gold, transparent, gold);
-    -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    animation: borderGlow 4s linear infinite;
+    width: 60px;
+    opacity: 0.6;
 }
 
-@keyframes borderGlow {
-    0% { filter: brightness(1); }
-    50% { filter: brightness(1.5); }
-    100% { filter: brightness(1); }
-}
+.top-left { top: -10px; left: -10px; }
+.top-right { top: -10px; right: -10px; transform: rotate(90deg); }
+.bottom-left { bottom: -10px; left: -10px; transform: rotate(-90deg); }
+.bottom-right { bottom: -10px; right: -10px; transform: rotate(180deg); }
 
 .ganpati {
     font-size: 24px;
@@ -178,6 +172,13 @@ body {
 <!-- ENTRY -->
 <div id="entry">
     <div class="entry-card">
+
+        <!-- SVG CORNERS -->
+        <img src="corner.svg" class="corner top-left">
+        <img src="corner.svg" class="corner top-right">
+        <img src="corner.svg" class="corner bottom-left">
+        <img src="corner.svg" class="corner bottom-right">
+
         <div class="ganpati">ॐ</div>
         <div class="title">Vastu Shanti Invitation</div>
         <p>Disale Family invites you</p>
@@ -210,12 +211,12 @@ body {
     </p>
 
     <p class="details">
-        📅 14 May 2026<br>
+        📅 25 December 2026<br>
         ⏰ 10:00 AM onwards
     </p>
 
     <p class="details">
-        📍 Shantinagar, Shahupuri Satara
+        📍 Your Address Here
     </p>
 
     <a class="btn" href="https://www.google.com/maps?q=your+address" target="_blank">
@@ -226,17 +227,17 @@ body {
 </div>
 
 <script>
-function startInvite() {
+let slider = document.getElementById("slider");
+let slides = document.querySelectorAll(".slider img");
+let index = 0;
 
-    if (navigator.vibrate) {
-        navigator.vibrate(50);
-    }
+function startInvite() {
+    if (navigator.vibrate) navigator.vibrate(50);
 
     document.getElementById("entry").style.display = "none";
     document.getElementById("door").style.display = "block";
 
     document.getElementById("doorSound").play();
-
     document.getElementById("music").play().catch(()=>{});
 
     setTimeout(() => {
@@ -249,9 +250,6 @@ function startInvite() {
     }, 1600);
 }
 
-let slides = document.querySelectorAll(".slider img");
-let index = 0;
-
 setInterval(() => {
     slides[index].classList.remove("active");
     index = (index + 1) % slides.length;
@@ -259,6 +257,7 @@ setInterval(() => {
 }, 3000);
 
 let startX = 0;
+
 slider.addEventListener("touchstart", e => startX = e.touches[0].clientX);
 slider.addEventListener("touchend", e => {
     let endX = e.changedTouches[0].clientX;
