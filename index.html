@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>वास्तु शांती निमंत्रण</title>
-
+<title>वास्तुशांती व गृहप्रवेश निमंत्रण</title>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Marathi&family=Yatra+One&display=swap" rel="stylesheet">
 
 <style>
@@ -16,75 +15,45 @@
     --foil: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
 }
 
-body {
-    margin: 0;
-    font-family: 'Tiro Devanagari Marathi', serif;
-    background: #1a0202;
-    overflow-x: hidden;
-}
+body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a0202; overflow-x: hidden; color: #4a3728; }
 
-/* ===== MUSIC CONTROL ===== */
+/* AUDIO CONTROL */
 .music-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: var(--maroon);
-    border: 2px solid var(--gold);
-    color: var(--gold-bright);
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
+    position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+    width: 45px; height: 45px; border-radius: 50%;
+    background: var(--maroon); border: 2px solid var(--gold);
+    color: var(--gold-bright); cursor: pointer; font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
 }
 
-/* ===== GOLD FOIL ANIMATION ===== */
+/* GOLD FOIL ANIMATION */
 .foil-text {
-    background: var(--foil);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% auto;
+    background: var(--foil); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; background-size: 200% auto;
     animation: shine 3s infinite linear;
 }
+@keyframes shine { to { background-position: 200% center; } }
 
-@keyframes shine {
-    to { background-position: 200% center; }
-}
-
-/* ===== SCROLL INTRO ===== */
+/* SCROLL INTRO SECTION */
 #scrollIntro {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle, #4a0000 0%, #1a0202 100%);
-    z-index: 100;
-    transition: opacity 1.2s ease;
+    position: fixed; inset: 0; display: flex; align-items: center;
+    justify-content: center; background: radial-gradient(circle, #4a0000 0%, #1a0202 100%);
+    z-index: 100; transition: opacity 1.2s ease;
 }
 
-.scroll-wrapper { width: 90%; max-width: 400px; position: relative; }
+.scroll-wrapper { width: 90%; max-width: 400px; position: relative; text-align: center; }
 
 .scroll {
-    width: 100%;
-    height: 0;
-    background: var(--cream);
+    width: 100%; height: 0; background: var(--cream);
     background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
-    border-left: 4px solid var(--gold);
-    border-right: 4px solid var(--gold);
-    overflow: hidden;
-    transition: height 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 4px solid var(--gold); border-right: 4px solid var(--gold);
+    overflow: hidden; transition: height 1.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .roll {
-    width: 110%; height: 35px;
+    width: 110%; height: 35px; border-radius: 10px;
     background: linear-gradient(to right, #8a6d3b, var(--gold-bright), #8a6d3b);
-    position: absolute; left: -5%; z-index: 102; border-radius: 10px;
+    position: absolute; left: -5%; z-index: 102;
 }
 .roll.top { top: 50%; transform: translateY(-50%); }
 .roll.bottom { bottom: 50%; transform: translateY(50%); }
@@ -93,98 +62,81 @@ body {
 .open .roll.top { top: 0; }
 .open .roll.bottom { bottom: 0; }
 
-.scroll-content { opacity: 0; padding: 40px 20px; text-align: center; transition: 1s ease 1.2s; }
+#startBtn {
+    padding: 12px 30px; background: var(--maroon); color: white;
+    border: 2px solid var(--gold); border-radius: 30px; font-weight: bold;
+    cursor: pointer; position: absolute; z-index: 110; left: 50%; transform: translateX(-50%);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); font-family: 'Yatra One', cursive;
+}
+
+.scroll-content { opacity: 0; padding: 40px 20px; transition: 1s ease 1.2s; }
 .open .scroll-content { opacity: 1; }
 
-/* ===== POLAROID GALLERY ===== */
-.polaroid-stack {
-    position: relative;
-    height: 280px;
-    width: 220px;
-    margin: 30px auto;
-}
-
-.polaroid {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    background: white;
-    padding: 10px 10px 30px 10px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    border: 1px solid #ddd;
-    transition: all 0.8s ease-in-out;
-    opacity: 0;
-    transform: scale(0.9) rotate(-5deg);
-}
-
-.polaroid img { width: 100%; height: 180px; object-fit: cover; }
-
-.polaroid.active {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-    z-index: 5;
-}
-
-.polaroid.prev {
-    opacity: 0.5;
-    transform: scale(0.8) rotate(-10deg) translateX(-50px);
-    z-index: 1;
-}
-
-/* ===== MAIN CARD ===== */
-#main {
-    display: none;
-    min-height: 100vh;
-    padding: 20px;
-    background: radial-gradient(circle, #5b0f0f 0%, #1a0202 100%);
-}
+/* MAIN CARD CONTAINER */
+#main { display: none; min-height: 100vh; padding: 20px 10px; background: radial-gradient(circle, #5b0f0f 0%, #1a0202 100%); }
 
 .card {
-    max-width: 450px;
-    margin: 20px auto;
-    background: var(--cream);
+    max-width: 500px; margin: 0 auto; background: var(--cream);
     background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
-    border: 6px double var(--gold);
-    padding: 40px 20px;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-    animation: cardFade 1.5s ease;
+    border: 6px double var(--gold); padding: 50px 25px; text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8); position: relative;
+    overflow: hidden;
 }
 
-@keyframes cardFade { from {opacity: 0; transform: translateY(30px);} to {opacity: 1; transform: translateY(0);} }
+/* BANANA LEAVES */
+.banana-leaf {
+    position: absolute; width: 80px; bottom: -10px; z-index: 1; opacity: 0.8;
+}
+.leaf-left { left: -15px; transform: rotate(10deg); }
+.leaf-right { right: -15px; transform: rotate(-10deg) scaleX(-1); }
 
-.main-title { font-family: 'Yatra One', cursive; font-size: 50px; margin: 10px 0; }
+/* CONTENT STYLING */
+.mantra { color: var(--maroon); font-weight: bold; font-size: 18px; margin-bottom: 15px; display: block; }
+.poem { font-size: 14px; font-style: italic; line-height: 1.6; margin: 20px 0; color: #5d4037; }
+.title-big { font-family: 'Yatra One', cursive; font-size: 38px; line-height: 1.2; margin: 15px 0; }
+.event-box { 
+    background: rgba(212, 175, 55, 0.1); border-top: 1px solid var(--gold); 
+    border-bottom: 1px solid var(--gold); padding: 20px 10px; margin: 25px 0;
+}
+
+/* POLAROID STACK */
+.polaroid-stack { position: relative; height: 260px; width: 220px; margin: 20px auto; z-index: 2; }
+.polaroid {
+    position: absolute; top: 0; left: 0; width: 100%; background: white;
+    padding: 10px 10px 30px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.8s ease; opacity: 0; transform: scale(0.9) rotate(-3deg);
+}
+.polaroid img { width: 100%; height: 180px; object-fit: cover; }
+.polaroid.active { opacity: 1; transform: scale(1) rotate(0deg); z-index: 5; }
+
+.contact-info { margin-top: 30px; font-weight: bold; color: var(--maroon); border-top: 1px dashed var(--gold); padding-top: 15px; }
 
 .btn {
-    display: inline-block;
-    background: var(--maroon);
-    color: white;
-    padding: 12px 35px;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: bold;
-    margin-top: 20px;
-    border: 1px solid var(--gold);
+    display: inline-block; background: var(--maroon); color: white;
+    padding: 12px 35px; text-decoration: none; border-radius: 50px;
+    font-weight: bold; margin-top: 20px; border: 1px solid var(--gold);
 }
 </style>
 </head>
 
 <body>
 
-<button class="music-btn" onclick="toggleMusic()" id="mBtn">🔇</button>
-<audio id="bgMusic" loop>
-    <source src="https://www.chosic.com/wp-content/uploads/2021/07/The-Grand-Entrance.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop preload="auto">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
+
+<button class="music-btn" onclick="toggleMusic()" id="mBtn">🔇</button>
 
 <div id="scrollIntro">
     <div class="scroll-wrapper">
+        <button id="startBtn" onclick="initPage()">निमंत्रण उघडा</button>
         <div class="roll top"></div>
         <div class="scroll">
             <div class="scroll-content">
-                <img src="ganpati.jpeg" style="width:60px;">
-                <h1 class="intro-title foil-text" style="font-family:'Yatra One'; font-size:32px;">सहर्ष स्वागत</h1>
-                <p style="color:var(--maroon); font-weight:bold;">डिसाले कुटुंबियांकडून आपल्याला निमंत्रण...</p>
-                <p style="font-size:20px;">🌸🌸🌸</p>
+                <img src="ganpati.jpeg" style="width:70px;">
+                <h2 class="foil-text" style="font-family:'Yatra One';">सहर्ष स्वागत</h2>
+                <p>दिसले कुटुंबियांकडून स्नेहादराचे आमंत्रण...</p>
+                <p>🚩🚩🚩</p>
             </div>
         </div>
         <div class="roll bottom"></div>
@@ -193,13 +145,21 @@ body {
 
 <div id="main">
     <div class="card">
-        <img src="ganpati.jpeg" style="width:70px;">
-        <div style="color:var(--maroon); font-weight:bold;">।। श्री गणेशाय नमः ।।</div>
+        <img src="https://cdn-icons-png.flaticon.com/512/1864/1864474.png" class="banana-leaf leaf-left" alt="leaf">
+        <img src="https://cdn-icons-png.flaticon.com/512/1864/1864474.png" class="banana-leaf leaf-right" alt="leaf">
 
-        <div style="font-family:'Yatra One'; font-size:24px; color:var(--maroon); margin-top:15px;">श्री. आणि श्रीमती. डिसाले</div>
-        <p>आमच्या नवीन वास्तूच्या पूजन सोहळ्यास आपण उपस्थित राहावे ही विनंती.</p>
+        <span class="mantra">|| श्री गणेशाय नमः ||</span>
         
-        <h1 class="main-title foil-text">वास्तु पूजन</h1>
+        <div style="font-family:'Yatra One'; font-size:24px; color:var(--maroon);">श्री. आणि श्रीमती दिसले </div>
+        
+        <p class="poem">
+            स्वप्न एका नव्या वास्तूचे, साकार झाले आपल्या आशीर्वादाने,<br>
+            कार्य नूतन गृहाचे वास्तुशांतीचे, योजिले श्री कुलदेवतेच्या कृपेने,<br>
+            तोरण या वास्तूवर चढावे, आपणा सर्वांच्या साक्षीने,<br>
+            रंगत या कार्याची वाढावी तुमच्या आनंददायी सहवासाने !
+        </p>
+
+        <h1 class="title-big foil-text">वास्तुशांती व गृहप्रवेश</h1>
 
         <div class="polaroid-stack">
             <div class="polaroid active"><img src="house1.jpg"></div>
@@ -207,61 +167,58 @@ body {
             <div class="polaroid"><img src="house3.jpg"></div>
         </div>
 
-        <div style="border-top:2px solid var(--gold); border-bottom:2px solid var(--gold); padding:15px 0; margin:20px 0;">
-            <div style="font-size:22px; font-weight:bold; color:var(--maroon);">📅 २५ डिसेंबर २०२६</div>
-            <div style="font-weight:bold;">⏰ सकाळी १०:०० वा. पासून</div>
+        <div class="event-box">
+            <div style="font-size:20px; font-weight:bold; color:var(--maroon); margin-bottom:10px;">
+                📅 शनिवार दि. ८ जून २०२४
+            </div>
+            <div style="font-size:15px; line-height:1.8;">
+                <b>सकाळी ११.०० ते २.०० वा.</b> : गृहप्रवेश व वास्तुशांती<br>
+                <b>दुपारी ३.०० ते ४.०० वा.</b> : श्री सत्यनारायण महापूजा
+            </div>
         </div>
 
-        <p>📍 <b>पत्ता:</b><br>पाटील निवास, पाईपलाईन रोड जवळ, बदलापूर (पूर्व)</p>
+        <p>तरी आपली उपस्थीती प्रार्थनीय आहे..</p>
+
+        <div class="contact-info">
+            संपर्क : नागेश दिसले &nbsp; | &nbsp; +९१ १२३४५६७८९०
+        </div>
 
         <a class="btn" href="https://maps.google.com" target="_blank">📍 लोकेशन पहा</a>
     </div>
 </div>
 
 <script>
-// Music Logic
 const music = document.getElementById("bgMusic");
 const mBtn = document.getElementById("mBtn");
-function toggleMusic() {
-    if (music.paused) {
-        music.play();
-        mBtn.innerHTML = "🔊";
-    } else {
-        music.pause();
-        mBtn.innerHTML = "🔇";
-    }
+
+function initPage() {
+    music.play().then(() => { mBtn.innerHTML = "🔊"; }).catch(e => console.log("Audio blocked"));
+    document.getElementById("startBtn").style.display = "none";
+    document.getElementById("scrollIntro").classList.add("open");
+
+    setTimeout(() => {
+        const intro = document.getElementById("scrollIntro");
+        intro.style.opacity = "0";
+        setTimeout(() => {
+            intro.style.display = "none";
+            document.getElementById("main").style.display = "block";
+        }, 1200);
+    }, 4500);
 }
 
-// Open Scroll
-setTimeout(() => {
-    document.getElementById("scrollIntro").classList.add("open");
-}, 600);
+function toggleMusic() {
+    if (music.paused) { music.play(); mBtn.innerHTML = "🔊"; } 
+    else { music.pause(); mBtn.innerHTML = "🔇"; }
+}
 
-// Transition to Card
-setTimeout(() => {
-    const intro = document.getElementById("scrollIntro");
-    intro.style.opacity = "0";
-    setTimeout(() => {
-        intro.style.display = "none";
-        document.getElementById("main").style.display = "block";
-    }, 1200);
-}, 4500);
-
-// Polaroid Rotation Logic
+// Polaroid Rotation
 let polaroids = document.querySelectorAll(".polaroid");
 let currentP = 0;
-
 setInterval(() => {
     polaroids[currentP].classList.remove("active");
-    polaroids[currentP].classList.add("prev");
-    
-    let nextP = (currentP + 1) % polaroids.length;
-    
-    polaroids[nextP].classList.remove("prev");
-    polaroids[nextP].classList.add("active");
-    
-    currentP = nextP;
-}, 3500);
+    currentP = (currentP + 1) % polaroids.length;
+    polaroids[currentP].classList.add("active");
+}, 3000);
 </script>
 
 </body>
