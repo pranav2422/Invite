@@ -78,28 +78,26 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 .card {
     max-width: 500px; margin: 0 auto; background: var(--cream);
     background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
-    border: 6px double var(--gold); padding: 60px 25px 40px; text-align: center;
+    border: 6px double var(--gold); padding: 70px 25px 40px; text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.8); position: relative;
     overflow: hidden;
 }
 
-/* DECORATION: TORAN (Top Garland) */
+/* DECORATIONS */
 .toran-css {
     position: absolute; top: 0; left: 0; width: 100%;
     font-size: 24px; color: #ff8c00; letter-spacing: 2px;
     padding: 5px 0; border-bottom: 2px solid #2d5a27;
-    background: rgba(255, 255, 255, 0.3); z-index: 10;
+    background: rgba(255, 255, 255, 0.4); z-index: 10;
 }
-
-/* DECORATION: BANANA LEAVES (Sides) */
 .banana-leaf {
-    position: absolute; font-size: 80px; bottom: -10px; z-index: 1; opacity: 0.9;
+    position: absolute; font-size: 90px; bottom: -15px; z-index: 1; opacity: 0.95;
 }
-.leaf-left { left: -10px; transform: rotate(15deg); }
-.leaf-right { right: -10px; transform: rotate(-15deg) scaleX(-1); }
+.leaf-left { left: -15px; transform: rotate(15deg); }
+.leaf-right { right: -15px; transform: rotate(-15deg) scaleX(-1); }
 
 /* CONTENT STYLING */
-.mantra { color: var(--maroon); font-weight: bold; font-size: 18px; margin-top: 15px; margin-bottom: 15px; display: block; position: relative; z-index: 2; }
+.mantra { color: var(--maroon); font-weight: bold; font-size: 18px; margin: 10px 0; display: block; position: relative; z-index: 2; }
 .poem { font-size: 14px; font-style: italic; line-height: 1.6; margin: 20px 0; color: #5d4037; position: relative; z-index: 2; }
 .title-big { font-family: 'Yatra One', cursive; font-size: 38px; line-height: 1.2; margin: 15px 0; position: relative; z-index: 2; }
 .event-box { 
@@ -118,7 +116,9 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 .polaroid img { width: 100%; height: 180px; object-fit: cover; }
 .polaroid.active { opacity: 1; transform: scale(1) rotate(0deg); z-index: 5; }
 
-.contact-info { margin-top: 30px; font-weight: bold; color: var(--maroon); border-top: 1px dashed var(--gold); padding-top: 15px; position: relative; z-index: 2; }
+.contact-info { margin-top: 30px; font-weight: bold; color: var(--maroon); border-top: 1px dashed var(--gold); padding-top: 15px; position: relative; z-index: 2; line-height: 1.6; }
+
+.address-box { margin: 15px 0; font-size: 15px; color: #5d4037; position: relative; z-index: 2; }
 
 .btn {
     display: inline-block; background: var(--maroon); color: white;
@@ -132,7 +132,7 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 <body>
 
 <audio id="bgMusic" loop preload="auto">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    <source src="Musicbackground.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music-btn" onclick="toggleMusic()" id="mBtn">🔇</button>
@@ -145,8 +145,8 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
             <div class="scroll-content">
                 <img src="ganpati.jpeg" style="width:70px;" alt="Ganpati">
                 <h2 class="foil-text" style="font-family:'Yatra One';">सहर्ष स्वागत</h2>
-                <p>डिसाले कुटुंबियांकडून स्नेहादराचे आमंत्रण...</p>
-                <p>🏮 🏮 🏮</p>
+                <p>दिसले कुटुंबियांकडून स्नेहादराचे आमंत्रण...</p>
+                <p style="font-size: 24px;">🌸 🌸 🌸</p>
             </div>
         </div>
         <div class="roll bottom"></div>
@@ -156,13 +156,12 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 <div id="main">
     <div class="card">
         <div class="toran-css">🌼🍃🌼🍃🌼🍃🌼🍃🌼🍃🌼</div>
-
         <div class="banana-leaf leaf-left">🌿</div>
         <div class="banana-leaf leaf-right">🌿</div>
 
         <span class="mantra">|| श्री गणेशाय नमः ||</span>
         
-        <div style="font-family:'Yatra One'; font-size:24px; color:var(--maroon);">श्री. आणि श्रीमती. डिसाले</div>
+        <div style="font-family:'Yatra One'; font-size:24px; color:var(--maroon);">श्री. आणि श्रीमती. दिसले</div>
         
         <p class="poem">
             स्वप्न एका नव्या वास्तूचे, साकार झाले आपल्या आशीर्वादाने,<br>
@@ -174,28 +173,31 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
         <h1 class="title-big foil-text">वास्तुशांती व गृहप्रवेश</h1>
 
         <div class="polaroid-stack">
-            <div class="polaroid active"><img src="house1.jpg" alt="House 1"></div>
-            <div class="polaroid"><img src="house2.jpg" alt="House 2"></div>
-            <div class="polaroid"><img src="house3.jpg" alt="House 3"></div>
+            <div class="polaroid active"><img src="1000361297.jpg" alt="House 1"></div>
+            <div class="polaroid"><img src="1000361295.jpg" alt="House 2"></div>
+            <div class="polaroid"><img src="1000361293.jpg" alt="House 3"></div>
         </div>
 
         <div class="event-box">
-            <div style="font-size:20px; font-weight:bold; color:var(--maroon); margin-bottom:10px;">
-                📅 शनिवार दि. ८ जून २०२४
-            </div>
-            <div style="font-size:15px; line-height:1.8;">
-                <b>सकाळी ११.०० ते २.०० वा.</b> : गृहप्रवेश व वास्तुशांती<br>
-                <b>दुपारी ३.०० ते ४.०० वा.</b> : श्री सत्यनारायण महापूजा
+            <div style="font-size:16px; line-height:1.8;">
+                गुरुवार दि. १४ मे २०२६ रोजी सकाळी १०.०० ते दुपारी २.०० वा. वास्तुशांती व गृहप्रवेश योजीला आहे, तरी आपली उपस्थीती प्रार्थनीय आहे..<br><br>
+                <b>महाप्रसाद :</b> दुपारी ०१:०० ते ०४ वाजेपर्यंत.
             </div>
         </div>
 
-        <p>तरी आपली उपस्थीती प्रार्थनीय आहे..</p>
+        <div class="address-box">
+            <b>ठिकाण :-</b><br>
+            'माऊली' प्लॉट नं. ४, शिवपार्वती नगर,<br>
+            आंबेदरे रोड, शाहूपुरी, सातारा.
+        </div>
 
         <div class="contact-info">
-            संपर्क : नागेश दिसले   |   +९१ ९८९०XXXXXX
+            <b>निमंत्रक :-</b><br>
+            श्री. प्रणव नागेश दिसले व संपूर्ण दिसले परिवार<br>
+            <b>संपर्क -</b> ९१+ ८८०५६९२२०१
         </div>
 
-        <a class="btn" href="https://maps.google.com" target="_blank">📍 लोकेशन पहा</a>
+        <a class="btn" href="https://maps.google.com/?q=Shahupuri+Satara+Maharashtra" target="_blank">📍 लोकेशन पहा</a>
     </div>
 </div>
 
@@ -204,14 +206,9 @@ const music = document.getElementById("bgMusic");
 const mBtn = document.getElementById("mBtn");
 
 function initPage() {
-    // Attempt to play music
-    music.play().then(() => { 
-        mBtn.innerHTML = "🔊"; 
-    }).catch(err => console.log("Audio play requires user click interaction."));
-    
+    music.play().then(() => { mBtn.innerHTML = "🔊"; }).catch(err => console.log("Audio requires interaction"));
     document.getElementById("startBtn").style.display = "none";
     document.getElementById("scrollIntro").classList.add("open");
-
     setTimeout(() => {
         const intro = document.getElementById("scrollIntro");
         intro.style.opacity = "0";
@@ -227,7 +224,6 @@ function toggleMusic() {
     else { music.pause(); mBtn.innerHTML = "🔇"; }
 }
 
-// Polaroid Rotation
 let polaroids = document.querySelectorAll(".polaroid");
 let currentP = 0;
 setInterval(() => {
