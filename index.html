@@ -10,15 +10,50 @@
 <style>
 :root {
     --gold: #d4af37;
-    --maroon: #800000;
+    --gold-bright: #f9e27d;
+    --maroon: #600000;
     --cream: #fff9eb;
-    --border-color: #c5a059;
+    --foil: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
 }
 
 body {
     margin: 0;
     font-family: 'Tiro Devanagari Marathi', serif;
-    background: #2c0505; /* Dark background to make the card pop */
+    background: #1a0202;
+    overflow-x: hidden;
+}
+
+/* ===== MUSIC CONTROL ===== */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--maroon);
+    border: 2px solid var(--gold);
+    color: var(--gold-bright);
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* ===== GOLD FOIL ANIMATION ===== */
+.foil-text {
+    background: var(--foil);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
 }
 
 /* ===== SCROLL INTRO ===== */
@@ -28,245 +63,205 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #2c0505;
-    z-index: 10;
+    background: radial-gradient(circle, #4a0000 0%, #1a0202 100%);
+    z-index: 100;
+    transition: opacity 1.2s ease;
 }
 
+.scroll-wrapper { width: 90%; max-width: 400px; position: relative; }
+
 .scroll {
-    width: 90%;
-    max-width: 400px;
+    width: 100%;
     height: 0;
     background: var(--cream);
-    border-radius: 10px;
-    border: 2px solid var(--gold);
+    background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
+    border-left: 4px solid var(--gold);
+    border-right: 4px solid var(--gold);
     overflow: hidden;
-    transition: height 1.6s ease;
+    transition: height 1.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .roll {
-    position: absolute;
-    width: 100%;
-    height: 40px;
-    background: linear-gradient(#d4af37, #b8962e);
-    border-radius: 50%;
-    z-index: 11;
+    width: 110%; height: 35px;
+    background: linear-gradient(to right, #8a6d3b, var(--gold-bright), #8a6d3b);
+    position: absolute; left: -5%; z-index: 102; border-radius: 10px;
 }
-.roll.top { top: 50%; }
-.roll.bottom { bottom: 50%; }
+.roll.top { top: 50%; transform: translateY(-50%); }
+.roll.bottom { bottom: 50%; transform: translateY(50%); }
 
-.open .scroll { height: 350px; }
-.open .roll.top { transform: translateY(-175px); transition: 1.6s; }
-.open .roll.bottom { transform: translateY(175px); transition: 1.6s; }
+.open .scroll { height: 380px; }
+.open .roll.top { top: 0; }
+.open .roll.bottom { bottom: 0; }
 
-.scroll-content {
-    text-align: center;
-    opacity: 0;
-    padding: 30px;
-    transition: opacity 1s ease 1s;
-}
+.scroll-content { opacity: 0; padding: 40px 20px; text-align: center; transition: 1s ease 1.2s; }
 .open .scroll-content { opacity: 1; }
 
-/* ===== MAIN CARD DESIGN ===== */
+/* ===== POLAROID GALLERY ===== */
+.polaroid-stack {
+    position: relative;
+    height: 280px;
+    width: 220px;
+    margin: 30px auto;
+}
+
+.polaroid {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    background: white;
+    padding: 10px 10px 30px 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    border: 1px solid #ddd;
+    transition: all 0.8s ease-in-out;
+    opacity: 0;
+    transform: scale(0.9) rotate(-5deg);
+}
+
+.polaroid img { width: 100%; height: 180px; object-fit: cover; }
+
+.polaroid.active {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    z-index: 5;
+}
+
+.polaroid.prev {
+    opacity: 0.5;
+    transform: scale(0.8) rotate(-10deg) translateX(-50px);
+    z-index: 1;
+}
+
+/* ===== MAIN CARD ===== */
 #main {
     display: none;
     min-height: 100vh;
     padding: 20px;
-    background: radial-gradient(circle, #5b0f0f 0%, #2c0505 100%);
+    background: radial-gradient(circle, #5b0f0f 0%, #1a0202 100%);
 }
 
 .card {
     max-width: 450px;
     margin: 20px auto;
     background: var(--cream);
-    border: 6px double var(--border-color);
+    background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
+    border: 6px double var(--gold);
     padding: 40px 20px;
     text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    animation: cardFade 1.5s ease;
 }
 
-/* Traditional Toran Decoration */
-.card::before {
-    content: "✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿";
-    position: absolute;
-    top: 5px;
-    left: 0;
-    width: 100%;
-    color: var(--maroon);
-    font-size: 24px;
-    opacity: 0.7;
-}
+@keyframes cardFade { from {opacity: 0; transform: translateY(30px);} to {opacity: 1; transform: translateY(0);} }
 
-.ganpati {
-    width: 70px;
-    margin-bottom: 5px;
-}
-
-.mantra {
-    color: var(--maroon);
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.host-name {
-    font-family: 'Yatra One', cursive;
-    font-size: 22px;
-    color: var(--maroon);
-    margin-bottom: 5px;
-}
-
-.main-title {
-    font-family: 'Yatra One', cursive;
-    font-size: 45px;
-    color: var(--maroon);
-    margin: 10px 0;
-    line-height: 1.2;
-}
-
-/* GALLERY FIX */
-.gallery-container {
-    margin: 20px 0;
-    position: relative;
-    border: 1px solid var(--gold);
-    padding: 5px;
-    background: white;
-}
-
-.gallery {
-    width: 100%;
-    height: 220px;
-    position: relative;
-    overflow: hidden;
-}
-
-.gallery img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    left: 0;
-    top: 0;
-}
-
-.gallery img.active { opacity: 1; }
-
-/* TEXT STYLING */
-p {
-    line-height: 1.6;
-    color: #4b2e2e;
-    margin: 15px 0;
-}
-
-.event-details {
-    background: rgba(212, 175, 55, 0.1);
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    padding: 15px 0;
-    margin: 20px 0;
-}
-
-.date-text {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--maroon);
-}
+.main-title { font-family: 'Yatra One', cursive; font-size: 50px; margin: 10px 0; }
 
 .btn {
     display: inline-block;
-    margin-top: 20px;
-    padding: 12px 30px;
     background: var(--maroon);
     color: white;
+    padding: 12px 35px;
     text-decoration: none;
     border-radius: 50px;
     font-weight: bold;
-    transition: 0.3s;
-    box-shadow: 0 4px 15px rgba(128, 0, 0, 0.3);
+    margin-top: 20px;
+    border: 1px solid var(--gold);
 }
-
-.btn:hover {
-    background: var(--gold);
-    transform: translateY(-2px);
-}
-
 </style>
 </head>
 
 <body>
 
+<button class="music-btn" onclick="toggleMusic()" id="mBtn">🔇</button>
+<audio id="bgMusic" loop>
+    <source src="https://www.chosic.com/wp-content/uploads/2021/07/The-Grand-Entrance.mp3" type="audio/mpeg">
+</audio>
+
 <div id="scrollIntro">
-    <div class="roll top"></div>
-    <div class="scroll">
-        <div class="scroll-content">
-            <img src="ganpati.jpeg" class="ganpati" alt="Ganesha">
-            <div class="mantra">।। श्री गणेशाय नमः ।।</div>
-            <div class="main-title" style="font-size: 32px;">वास्तु शांती निमंत्रण</div>
-            <p>डिसाले कुटुंब आपल्याला सप्रेम निमंत्रण देते...</p>
+    <div class="scroll-wrapper">
+        <div class="roll top"></div>
+        <div class="scroll">
+            <div class="scroll-content">
+                <img src="ganpati.jpeg" style="width:60px;">
+                <h1 class="intro-title foil-text" style="font-family:'Yatra One'; font-size:32px;">सहर्ष स्वागत</h1>
+                <p style="color:var(--maroon); font-weight:bold;">डिसाले कुटुंबियांकडून आपल्याला निमंत्रण...</p>
+                <p style="font-size:20px;">🌸🌸🌸</p>
+            </div>
         </div>
+        <div class="roll bottom"></div>
     </div>
-    <div class="roll bottom"></div>
 </div>
 
 <div id="main">
     <div class="card">
-        <img src="ganpati.jpeg" class="ganpati">
-        <div class="mantra">।। श्री गणेशाय नमः ।।</div>
+        <img src="ganpati.jpeg" style="width:70px;">
+        <div style="color:var(--maroon); font-weight:bold;">।। श्री गणेशाय नमः ।।</div>
 
-        <div class="host-name">श्री. आणि श्रीमती. डिसाले</div>
-        <p>यांच्या शुभहस्ते आमच्या नवीन घराचे</p>
+        <div style="font-family:'Yatra One'; font-size:24px; color:var(--maroon); margin-top:15px;">श्री. आणि श्रीमती. डिसाले</div>
+        <p>आमच्या नवीन वास्तूच्या पूजन सोहळ्यास आपण उपस्थित राहावे ही विनंती.</p>
         
-        <h1 class="main-title">वास्तु पूजन</h1>
+        <h1 class="main-title foil-text">वास्तु पूजन</h1>
 
-        <div class="gallery-container">
-            <div class="gallery" id="gallery">
-                <img src="house1.jpg" class="active">
-                <img src="house2.jpg">
-                <img src="house3.jpg">
-            </div>
+        <div class="polaroid-stack">
+            <div class="polaroid active"><img src="house1.jpg"></div>
+            <div class="polaroid"><img src="house2.jpg"></div>
+            <div class="polaroid"><img src="house3.jpg"></div>
         </div>
 
-        <p>देवाच्या कृपेने व थोरामोठ्यांच्या आशीर्वादाने आमच्या स्वप्नातील वास्तू साकार झाली आहे. या आनंदप्रसंगी आपण उपस्थित राहून आम्हास आशीर्वाद द्यावेत, ही नम्र विनंती.</p>
-
-        <div class="event-details">
-            <div class="date-text">📅 २५ डिसेंबर २०२६</div>
-            <div>⏰ सकाळी १०:०० वाजल्यापासून</div>
+        <div style="border-top:2px solid var(--gold); border-bottom:2px solid var(--gold); padding:15px 0; margin:20px 0;">
+            <div style="font-size:22px; font-weight:bold; color:var(--maroon);">📅 २५ डिसेंबर २०२६</div>
+            <div style="font-weight:bold;">⏰ सकाळी १०:०० वा. पासून</div>
         </div>
 
-        <p>📍 <b>पत्ता:</b><br>
-        पाटील निवास, पाईपलाईन रोड जवळ,<br>
-        बदलापूर (पूर्व)</p>
+        <p>📍 <b>पत्ता:</b><br>पाटील निवास, पाईपलाईन रोड जवळ, बदलापूर (पूर्व)</p>
 
         <a class="btn" href="https://maps.google.com" target="_blank">📍 लोकेशन पहा</a>
     </div>
 </div>
 
 <script>
-// Scroll Animation Logic
+// Music Logic
+const music = document.getElementById("bgMusic");
+const mBtn = document.getElementById("mBtn");
+function toggleMusic() {
+    if (music.paused) {
+        music.play();
+        mBtn.innerHTML = "🔊";
+    } else {
+        music.pause();
+        mBtn.innerHTML = "🔇";
+    }
+}
+
+// Open Scroll
 setTimeout(() => {
     document.getElementById("scrollIntro").classList.add("open");
-}, 500);
+}, 600);
 
+// Transition to Card
 setTimeout(() => {
-    document.getElementById("scrollIntro").style.opacity = "0";
-    document.getElementById("scrollIntro").style.transition = "1s";
+    const intro = document.getElementById("scrollIntro");
+    intro.style.opacity = "0";
     setTimeout(() => {
-        document.getElementById("scrollIntro").style.display = "none";
+        intro.style.display = "none";
         document.getElementById("main").style.display = "block";
-    }, 1000);
-}, 3500);
+    }, 1200);
+}, 4500);
 
-// Smooth Image Slider Logic
-let slides = document.querySelectorAll("#gallery img");
-let currentIndex = 0;
+// Polaroid Rotation Logic
+let polaroids = document.querySelectorAll(".polaroid");
+let currentP = 0;
 
 setInterval(() => {
-    slides[currentIndex].classList.remove("active");
-    currentIndex = (currentIndex + 1) % slides.length;
-    slides[currentIndex].classList.add("active");
-}, 3000);
+    polaroids[currentP].classList.remove("active");
+    polaroids[currentP].classList.add("prev");
+    
+    let nextP = (currentP + 1) % polaroids.length;
+    
+    polaroids[nextP].classList.remove("prev");
+    polaroids[nextP].classList.add("active");
+    
+    currentP = nextP;
+}, 3500);
 </script>
 
 </body>
