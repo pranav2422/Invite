@@ -4,216 +4,172 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>वास्तु शांती निमंत्रण - डिसाले कुटुंब</title>
+<title>वास्तु शांती निमंत्रण</title>
 
-<!-- WhatsApp Preview -->
-<meta property="og:title" content="वास्तु शांती निमंत्रण - डिसाले कुटुंब">
-<meta property="og:description" content="आमच्या नवीन घराच्या वास्तु शांती पूजेसाठी आपणास सप्रेम निमंत्रण">
-<meta property="og:image" content="https://pranav2422.github.io/Invite/preview.jpeg">
-<meta property="og:url" content="https://pranav2422.github.io/Invite/">
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Marathi&family=Yatra+One&display=swap" rel="stylesheet">
 
 <style>
 body{
     margin:0;
-    font-family:'Inter',sans-serif;
-    background:#f7efe3;
+    font-family:'Tiro Devanagari Marathi', serif;
+    background:linear-gradient(135deg,#5b0f0f,#2c0505);
 }
 
-/* ENTRY */
-#entry{
-    height:100vh;
+/* SCROLL INTRO */
+#scrollIntro{
+    position:fixed;
+    inset:0;
     display:flex;
-    justify-content:center;
     align-items:center;
-    position:relative;
+    justify-content:center;
+    background:#2c0505;
     overflow:hidden;
 }
 
-/* PARTICLES */
+/* GOLD PARTICLES */
 .particles span{
     position:absolute;
-    width:4px;height:4px;
+    width:4px;
+    height:4px;
     background:#d4af37;
     border-radius:50%;
-    animation:float 8s linear infinite;
+    opacity:0;
+    animation:float 6s linear infinite;
 }
 @keyframes float{
-    0%{transform:translateY(20px);opacity:0}
-    50%{opacity:0.6}
+    0%{transform:translateY(50px);opacity:0}
+    50%{opacity:1}
     100%{transform:translateY(-100vh);opacity:0}
 }
 
-/* CARD */
-.entry-card{
-    text-align:center;
-    padding:30px;
-    border-radius:16px;
-    background:rgba(255,255,255,0.9);
-    border:1px solid #d4af37;
-    position:relative;
+/* SCROLL */
+.scroll{
+    width:90%;
+    max-width:400px;
+    height:0;
+    background:#fff8e7;
+    border-radius:10px;
+    overflow:hidden;
+    border:2px solid #d4af37;
+    transition:height 1.8s ease;
 }
 
-/* FLORAL CORNERS */
-.corner{
+/* ROLLS */
+.roll{
     position:absolute;
-    width:60px;
-    opacity:0.6;
+    width:100%;
+    height:40px;
+    background:linear-gradient(#d4af37,#b8962e);
+    border-radius:50%;
 }
-.tl{top:-10px;left:-10px}
-.tr{top:-10px;right:-10px;transform:rotate(90deg)}
-.bl{bottom:-10px;left:-10px;transform:rotate(-90deg)}
-.br{bottom:-10px;right:-10px;transform:rotate(180deg)}
+.roll.top{top:50%;}
+.roll.bottom{bottom:50%;}
+
+/* OPEN */
+.open .scroll{height:400px;}
+.open .roll.top{transform:translateY(-200px);transition:1.8s;}
+.open .roll.bottom{transform:translateY(200px);transition:1.8s;}
+
+/* CONTENT */
+.scroll-content{
+    text-align:center;
+    padding:20px;
+    opacity:0;
+    transition:opacity 1s ease 1s;
+}
+.open .scroll-content{opacity:1;}
 
 /* GANPATI */
 .ganpati{
-    width:90px;
-    opacity:0;
-    transform:scale(0.9);
-    animation:fade 1.2s forwards, glow 3s infinite 1.5s;
-}
-@keyframes fade{
-    to{opacity:1;transform:scale(1)}
-}
-@keyframes glow{
-    0%{filter:drop-shadow(0 0 2px rgba(212,175,55,0.3))}
-    50%{filter:drop-shadow(0 0 10px rgba(212,175,55,0.8))}
-    100%{filter:drop-shadow(0 0 2px rgba(212,175,55,0.3))}
+    width:70px;
+    margin-bottom:10px;
 }
 
-.title{
-    font-family:'Playfair Display',serif;
-    font-size:22px;
-    margin-top:10px;
+/* HANDWRITTEN STYLE */
+.handwritten{
+    font-family:'Yatra One', cursive;
+    font-size:24px;
 }
 
-/* CTA */
-.cta{
-    margin-top:20px;
-    width:60px;height:60px;
-    border-radius:50%;
-    border:1px solid #d4af37;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-inline:auto;
-    cursor:pointer;
-    animation:pulse 2s infinite;
-}
-.cta span{font-size:24px;}
-
-@keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(212,175,55,0.4)}
-    70%{box-shadow:0 0 0 15px rgba(212,175,55,0)}
-    100%{box-shadow:0 0 0 0 rgba(212,175,55,0)}
-}
-
-/* DOOR */
-#door{
-    position:fixed;
-    width:100%;
-    height:100%;
-    display:none;
-    z-index:10;
-}
-.panel{
-    width:50%;
-    height:100%;
-    float:left;
-    background:linear-gradient(#5a3e2b,#2c1b12);
-    transition:transform 1.5s;
-}
-.open .left{transform:translateX(-100%)}
-.open .right{transform:translateX(100%)}
-
-.light{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:radial-gradient(circle,rgba(255,223,150,0.5),transparent);
-    opacity:0;
-    transition:opacity 1s;
-}
-.open .light{opacity:1}
-
-/* MAIN */
+/* MAIN PAGE */
 #main{
     display:none;
     padding:20px;
+}
+
+/* CARD */
+.card{
+    max-width:420px;
+    margin:auto;
+    background:#fff8e7;
+    border-radius:20px;
+    padding:25px;
+    border:2px solid #d4af37;
     text-align:center;
 }
 
 /* SLIDER */
-.slider{
+.gallery{
     position:relative;
-    aspect-ratio:4/3;
+    height:220px;
     overflow:hidden;
 }
-.slider img{
+.gallery img{
+    position:absolute;
     width:100%;
     height:100%;
     object-fit:contain;
-    position:absolute;
     opacity:0;
     transition:opacity 1s;
 }
-.slider img.active{opacity:1;}
+.gallery img.active{opacity:1;}
 
 </style>
 </head>
 
 <body>
 
-<!-- AUDIO -->
-<audio id="doorSound" src="https://assets.mixkit.co/sfx/preview/mixkit-door-opening-199.mp3"></audio>
-<audio id="music" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
+<!-- SCROLL INTRO -->
+<div id="scrollIntro">
 
-<!-- ENTRY -->
-<div id="entry">
-
+<!-- PARTICLES -->
 <div class="particles">
 <span style="left:10%"></span>
-<span style="left:40%"></span>
+<span style="left:30%"></span>
+<span style="left:50%"></span>
 <span style="left:70%"></span>
+<span style="left:90%"></span>
 </div>
 
-<div class="entry-card">
+<div class="roll top"></div>
 
-<img src="corner.svg" class="corner tl">
-<img src="corner.svg" class="corner tr">
-<img src="corner.svg" class="corner bl">
-<img src="corner.svg" class="corner br">
+<div class="scroll" id="scrollBox">
+<div class="scroll-content">
 
 <img src="ganpati.jpeg" class="ganpati">
 
-<div class="title">वास्तु शांती निमंत्रण</div>
+<div class="handwritten">वास्तु शांती निमंत्रण</div>
 <p>डिसाले कुटुंब आपल्याला सप्रेम निमंत्रण देते</p>
 
-<div class="cta" onclick="startInvite()">
-<span>🔓</span>
-</div>
-
 </div>
 </div>
 
-<!-- DOOR -->
-<div id="door">
-<div class="panel left"></div>
-<div class="panel right"></div>
-<div class="light"></div>
+<div class="roll bottom"></div>
+
 </div>
 
 <!-- MAIN -->
 <div id="main">
+<div class="card">
 
-<div class="slider" id="slider">
+<h2 class="handwritten">वास्तु शांती पूजा</h2>
+
+<div class="gallery" id="gallery">
 <img src="house1.jpg" class="active">
 <img src="house2.jpg">
 <img src="house3.jpg">
 </div>
-
-<h2>वास्तु शांती पूजा</h2>
 
 <p>
 देवाच्या कृपेने व मोठ्यांच्या आशीर्वादाने,<br>
@@ -228,55 +184,29 @@ body{
 <p>📍 आपला पत्ता येथे</p>
 
 </div>
+</div>
 
 <script>
-let slider=document.getElementById("slider");
-let slides=document.querySelectorAll(".slider img");
-let index=0;
-
-function startInvite(){
-if(navigator.vibrate) navigator.vibrate(50);
-
-document.getElementById("entry").style.display="none";
-document.getElementById("door").style.display="block";
-
-document.getElementById("doorSound").play();
-document.getElementById("music").play().catch(()=>{});
-
-setTimeout(()=>{document.getElementById("door").classList.add("open")},100);
-
+/* SCROLL OPEN */
 setTimeout(()=>{
-document.getElementById("door").style.display="none";
+document.getElementById("scrollIntro").classList.add("open");
+},300);
+
+/* SWITCH PAGE */
+setTimeout(()=>{
+document.getElementById("scrollIntro").style.display="none";
 document.getElementById("main").style.display="block";
-},1600);
-}
+},3500);
 
-/* SLIDE */
+/* SLIDER */
+let slides=document.querySelectorAll("#gallery img");
+let i=0;
+
 setInterval(()=>{
-slides[index].classList.remove("active");
-index=(index+1)%slides.length;
-slides[index].classList.add("active");
+slides[i].classList.remove("active");
+i=(i+1)%slides.length;
+slides[i].classList.add("active");
 },3000);
-
-/* SWIPE */
-let startX=0;
-slider.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
-slider.addEventListener("touchend",e=>{
-let endX=e.changedTouches[0].clientX;
-if(startX>endX+50) next();
-else if(startX<endX-50) prev();
-});
-
-function next(){
-slides[index].classList.remove("active");
-index=(index+1)%slides.length;
-slides[index].classList.add("active");
-}
-function prev(){
-slides[index].classList.remove("active");
-index=(index-1+slides.length)%slides.length;
-slides[index].classList.add("active");
-}
 </script>
 
 </body>
