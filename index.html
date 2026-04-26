@@ -3,164 +3,193 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>वास्तु शांती निमंत्रण</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Marathi&family=Yatra+One&display=swap" rel="stylesheet">
 
 <style>
-:root{
-    --gold:#d4af37;
+:root {
+    --gold: #d4af37;
+    --maroon: #800000;
+    --cream: #fff9eb;
+    --border-color: #c5a059;
 }
 
-body{
-    margin:0;
-    font-family:'Tiro Devanagari Marathi', serif;
-    background:linear-gradient(135deg,#5b0f0f,#2c0505);
+body {
+    margin: 0;
+    font-family: 'Tiro Devanagari Marathi', serif;
+    background: #2c0505; /* Dark background to make the card pop */
 }
 
-/* ===== SCROLL ===== */
-#scrollIntro{
-    position:fixed;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#2c0505;
-    z-index:10;
+/* ===== SCROLL INTRO ===== */
+#scrollIntro {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2c0505;
+    z-index: 10;
 }
 
-/* PARTICLES */
-.particles span{
-    position:absolute;
-    width:4px;height:4px;
-    background:var(--gold);
-    border-radius:50%;
-    animation:float 6s linear infinite;
-}
-@keyframes float{
-    0%{transform:translateY(40px);opacity:0}
-    50%{opacity:0.8}
-    100%{transform:translateY(-100vh);opacity:0}
+.scroll {
+    width: 90%;
+    max-width: 400px;
+    height: 0;
+    background: var(--cream);
+    border-radius: 10px;
+    border: 2px solid var(--gold);
+    overflow: hidden;
+    transition: height 1.6s ease;
 }
 
-/* SCROLL BOX */
-.scroll{
-    width:90%;
-    max-width:420px;
-    height:0;
-    background:#fff8e7;
-    border-radius:14px;
-    border:2px solid var(--gold);
-    overflow:hidden;
-    transition:height 1.6s ease;
-    padding-top:20px; /* FIX spacing */
+.roll {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(#d4af37, #b8962e);
+    border-radius: 50%;
+    z-index: 11;
+}
+.roll.top { top: 50%; }
+.roll.bottom { bottom: 50%; }
+
+.open .scroll { height: 350px; }
+.open .roll.top { transform: translateY(-175px); transition: 1.6s; }
+.open .roll.bottom { transform: translateY(175px); transition: 1.6s; }
+
+.scroll-content {
+    text-align: center;
+    opacity: 0;
+    padding: 30px;
+    transition: opacity 1s ease 1s;
+}
+.open .scroll-content { opacity: 1; }
+
+/* ===== MAIN CARD DESIGN ===== */
+#main {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+    background: radial-gradient(circle, #5b0f0f 0%, #2c0505 100%);
 }
 
-/* ROLL */
-.roll{
-    position:absolute;
-    width:100%;
-    height:40px;
-    background:linear-gradient(#d4af37,#b8962e);
-    border-radius:50%;
-}
-.roll.top{top:50%}
-.roll.bottom{bottom:50%}
-
-.open .scroll{height:380px;}
-.open .roll.top{transform:translateY(-190px);transition:1.6s;}
-.open .roll.bottom{transform:translateY(190px);transition:1.6s;}
-
-/* CONTENT */
-.scroll-content{
-    text-align:center;
-    opacity:0;
-    padding:20px;
-    transition:opacity 1s ease 1s;
-}
-.open .scroll-content{opacity:1}
-
-/* GANPATI FIX */
-.ganpati{
-    width:80px;
-    display:block;
-    margin:0 auto 15px; /* FIX spacing */
+.card {
+    max-width: 450px;
+    margin: 20px auto;
+    background: var(--cream);
+    border: 6px double var(--border-color);
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    position: relative;
 }
 
-/* HANDWRITTEN */
-.handwritten{
-    font-family:'Yatra One', cursive;
-    font-size:24px;
+/* Traditional Toran Decoration */
+.card::before {
+    content: "✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿";
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 100%;
+    color: var(--maroon);
+    font-size: 24px;
+    opacity: 0.7;
 }
 
-/* ===== MAIN ===== */
-#main{
-    display:none;
-    min-height:100vh;
-    padding:20px;
-    background:
-        radial-gradient(circle at top, rgba(212,175,55,0.15), transparent 60%),
-        linear-gradient(135deg,#5b0f0f,#2c0505);
+.ganpati {
+    width: 70px;
+    margin-bottom: 5px;
 }
 
-/* CARD */
-.card{
-    max-width:420px;
-    margin:auto;
-    background:#fff8e7;
-    border-radius:18px;
-    padding:25px;
-    border:2px solid var(--gold);
-    text-align:center;
-    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+.mantra {
+    color: var(--maroon);
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
-/* ===== IMAGE FIX (IMPORTANT) ===== */
-.gallery{
-    position:relative;
-    width:100%;
-    height:240px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#000;
-    border-radius:10px;
-    overflow:hidden;
+.host-name {
+    font-family: 'Yatra One', cursive;
+    font-size: 22px;
+    color: var(--maroon);
+    margin-bottom: 5px;
 }
 
-.gallery img{
-    position:absolute;
-    max-width:100%;
-    max-height:100%;
-    object-fit:contain; /* FULL IMAGE */
-    opacity:0;
-    transition:opacity 1s;
+.main-title {
+    font-family: 'Yatra One', cursive;
+    font-size: 45px;
+    color: var(--maroon);
+    margin: 10px 0;
+    line-height: 1.2;
 }
 
-.gallery img.active{
-    opacity:1;
+/* GALLERY FIX */
+.gallery-container {
+    margin: 20px 0;
+    position: relative;
+    border: 1px solid var(--gold);
+    padding: 5px;
+    background: white;
 }
 
-/* TEXT */
-p{
-    line-height:1.7;
-    color:#4b2e2e;
+.gallery {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    overflow: hidden;
 }
 
-h2{
-    margin:10px 0;
+.gallery img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    left: 0;
+    top: 0;
 }
 
-/* BUTTON */
-.btn{
-    margin-top:12px;
-    padding:10px 18px;
-    border-radius:25px;
-    border:1px solid var(--gold);
-    text-decoration:none;
-    color:#4b2e2e;
-    display:inline-block;
+.gallery img.active { opacity: 1; }
+
+/* TEXT STYLING */
+p {
+    line-height: 1.6;
+    color: #4b2e2e;
+    margin: 15px 0;
+}
+
+.event-details {
+    background: rgba(212, 175, 55, 0.1);
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    padding: 15px 0;
+    margin: 20px 0;
+}
+
+.date-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--maroon);
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: var(--maroon);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(128, 0, 0, 0.3);
+}
+
+.btn:hover {
+    background: var(--gold);
+    transform: translateY(-2px);
 }
 
 </style>
@@ -168,82 +197,76 @@ h2{
 
 <body>
 
-<!-- SCROLL INTRO -->
 <div id="scrollIntro">
-
-<div class="particles">
-<span style="left:15%"></span>
-<span style="left:40%"></span>
-<span style="left:70%"></span>
+    <div class="roll top"></div>
+    <div class="scroll">
+        <div class="scroll-content">
+            <img src="ganpati.jpeg" class="ganpati" alt="Ganesha">
+            <div class="mantra">।। श्री गणेशाय नमः ।।</div>
+            <div class="main-title" style="font-size: 32px;">वास्तु शांती निमंत्रण</div>
+            <p>डिसाले कुटुंब आपल्याला सप्रेम निमंत्रण देते...</p>
+        </div>
+    </div>
+    <div class="roll bottom"></div>
 </div>
 
-<div class="roll top"></div>
-
-<div class="scroll">
-<div class="scroll-content">
-
-<img src="ganpati.jpeg" class="ganpati">
-
-<div class="handwritten">वास्तु शांती निमंत्रण</div>
-<p>डिसाले कुटुंब आपल्याला सप्रेम निमंत्रण देते</p>
-
-</div>
-</div>
-
-<div class="roll bottom"></div>
-
-</div>
-
-<!-- MAIN -->
 <div id="main">
-<div class="card">
+    <div class="card">
+        <img src="ganpati.jpeg" class="ganpati">
+        <div class="mantra">।। श्री गणेशाय नमः ।।</div>
 
-<h2 class="handwritten">वास्तु शांती पूजा</h2>
+        <div class="host-name">श्री. आणि श्रीमती. डिसाले</div>
+        <p>यांच्या शुभहस्ते आमच्या नवीन घराचे</p>
+        
+        <h1 class="main-title">वास्तु पूजन</h1>
 
-<div class="gallery" id="gallery">
-<img src="house1.jpg" class="active">
-<img src="house2.jpg">
-<img src="house3.jpg">
-</div>
+        <div class="gallery-container">
+            <div class="gallery" id="gallery">
+                <img src="house1.jpg" class="active">
+                <img src="house2.jpg">
+                <img src="house3.jpg">
+            </div>
+        </div>
 
-<p>
-देवाच्या कृपेने व मोठ्यांच्या आशीर्वादाने,<br>
-आमच्या नवीन घरासाठी आपणास सप्रेम निमंत्रण
-</p>
+        <p>देवाच्या कृपेने व थोरामोठ्यांच्या आशीर्वादाने आमच्या स्वप्नातील वास्तू साकार झाली आहे. या आनंदप्रसंगी आपण उपस्थित राहून आम्हास आशीर्वाद द्यावेत, ही नम्र विनंती.</p>
 
-<p>
-📅 २५ डिसेंबर २०२६<br>
-⏰ सकाळी १० वाजल्यापासून
-</p>
+        <div class="event-details">
+            <div class="date-text">📅 २५ डिसेंबर २०२६</div>
+            <div>⏰ सकाळी १०:०० वाजल्यापासून</div>
+        </div>
 
-<p>📍 आपला पत्ता येथे</p>
+        <p>📍 <b>पत्ता:</b><br>
+        पाटील निवास, पाईपलाईन रोड जवळ,<br>
+        बदलापूर (पूर्व)</p>
 
-<a class="btn" href="https://www.google.com/maps?q=your+address" target="_blank">
-लोकेशन पहा
-</a>
-
-</div>
+        <a class="btn" href="https://maps.google.com" target="_blank">📍 लोकेशन पहा</a>
+    </div>
 </div>
 
 <script>
-setTimeout(()=>{
-document.getElementById("scrollIntro").classList.add("open");
-},300);
+// Scroll Animation Logic
+setTimeout(() => {
+    document.getElementById("scrollIntro").classList.add("open");
+}, 500);
 
-setTimeout(()=>{
-document.getElementById("scrollIntro").style.display="none";
-document.getElementById("main").style.display="block";
-},3300);
+setTimeout(() => {
+    document.getElementById("scrollIntro").style.opacity = "0";
+    document.getElementById("scrollIntro").style.transition = "1s";
+    setTimeout(() => {
+        document.getElementById("scrollIntro").style.display = "none";
+        document.getElementById("main").style.display = "block";
+    }, 1000);
+}, 3500);
 
-/* SLIDER */
-let slides=document.querySelectorAll("#gallery img");
-let i=0;
+// Smooth Image Slider Logic
+let slides = document.querySelectorAll("#gallery img");
+let currentIndex = 0;
 
-setInterval(()=>{
-slides[i].classList.remove("active");
-i=(i+1)%slides.length;
-slides[i].classList.add("active");
-},3000);
+setInterval(() => {
+    slides[currentIndex].classList.remove("active");
+    currentIndex = (currentIndex + 1) % slides.length;
+    slides[currentIndex].classList.add("active");
+}, 3000);
 </script>
 
 </body>
