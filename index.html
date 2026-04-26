@@ -83,15 +83,18 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
     overflow: hidden;
 }
 
-/* BANANA LEAVES */
-.banana-leaf {
-    position: absolute; width: 80px; bottom: -10px; z-index: 1; opacity: 0.8;
+/* TRADITIONAL TORAN DECORATION */
+.toran {
+    position: absolute; top: 0; left: 0; width: 100%;
+    height: 60px;
+    background-image: url('https://img.freepik.com/free-vector/marigold-flower-garland-mango-leaves-decoration-white-background-diwali-festival-banner-vector-illustration_548887-142.jpg'); /* Traditional Garland Placeholder */
+    background-size: contain;
+    background-repeat: repeat-x;
+    opacity: 0.9;
 }
-.leaf-left { left: -15px; transform: rotate(10deg); }
-.leaf-right { right: -15px; transform: rotate(-10deg) scaleX(-1); }
 
 /* CONTENT STYLING */
-.mantra { color: var(--maroon); font-weight: bold; font-size: 18px; margin-bottom: 15px; display: block; }
+.mantra { color: var(--maroon); font-weight: bold; font-size: 18px; margin-top: 15px; margin-bottom: 15px; display: block; }
 .poem { font-size: 14px; font-style: italic; line-height: 1.6; margin: 20px 0; color: #5d4037; }
 .title-big { font-family: 'Yatra One', cursive; font-size: 38px; line-height: 1.2; margin: 15px 0; }
 .event-box { 
@@ -122,7 +125,7 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 <body>
 
 <audio id="bgMusic" loop preload="auto">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    <source src="https://www.bensound.com/bensound-music/bensound-india.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music-btn" onclick="toggleMusic()" id="mBtn">🔇</button>
@@ -135,8 +138,8 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
             <div class="scroll-content">
                 <img src="ganpati.jpeg" style="width:70px;">
                 <h2 class="foil-text" style="font-family:'Yatra One';">सहर्ष स्वागत</h2>
-                <p>दिसले कुटुंबियांकडून स्नेहादराचे आमंत्रण...</p>
-                <p>🚩🚩🚩</p>
+                <p>डिसाले कुटुंबियांकडून स्नेहादराचे आमंत्रण...</p>
+                <p>🪔🪔🪔</p>
             </div>
         </div>
         <div class="roll bottom"></div>
@@ -145,12 +148,11 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 
 <div id="main">
     <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1864/1864474.png" class="banana-leaf leaf-left" alt="leaf">
-        <img src="https://cdn-icons-png.flaticon.com/512/1864/1864474.png" class="banana-leaf leaf-right" alt="leaf">
+        <div class="toran"></div>
 
         <span class="mantra">|| श्री गणेशाय नमः ||</span>
         
-        <div style="font-family:'Yatra One'; font-size:24px; color:var(--maroon);">श्री. आणि श्रीमती दिसले </div>
+        <div style="font-family:'Yatra One'; font-size:24px; color:var(--maroon);">श्री. आणि श्रीमती. डिसाले</div>
         
         <p class="poem">
             स्वप्न एका नव्या वास्तूचे, साकार झाले आपल्या आशीर्वादाने,<br>
@@ -180,7 +182,7 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
         <p>तरी आपली उपस्थीती प्रार्थनीय आहे..</p>
 
         <div class="contact-info">
-            संपर्क : नागेश दिसले &nbsp; | &nbsp; +९१ १२३४५६७८९०
+            संपर्क : नागेश दिसले   |   +९१ १२३४५६७८९०
         </div>
 
         <a class="btn" href="https://maps.google.com" target="_blank">📍 लोकेशन पहा</a>
@@ -192,7 +194,12 @@ const music = document.getElementById("bgMusic");
 const mBtn = document.getElementById("mBtn");
 
 function initPage() {
-    music.play().then(() => { mBtn.innerHTML = "🔊"; }).catch(e => console.log("Audio blocked"));
+    music.play().then(() => { 
+        mBtn.innerHTML = "🔊"; 
+    }).catch(e => {
+        console.log("Audio blocked - user must interact");
+    });
+    
     document.getElementById("startBtn").style.display = "none";
     document.getElementById("scrollIntro").classList.add("open");
 
@@ -211,7 +218,6 @@ function toggleMusic() {
     else { music.pause(); mBtn.innerHTML = "🔇"; }
 }
 
-// Polaroid Rotation
 let polaroids = document.querySelectorAll(".polaroid");
 let currentP = 0;
 setInterval(() => {
