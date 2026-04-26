@@ -78,32 +78,38 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 .card {
     max-width: 500px; margin: 0 auto; background: var(--cream);
     background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
-    border: 6px double var(--gold); padding: 50px 25px; text-align: center;
+    border: 6px double var(--gold); padding: 60px 25px 40px; text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.8); position: relative;
     overflow: hidden;
 }
 
-/* TRADITIONAL TORAN DECORATION */
-.toran {
+/* DECORATION: TORAN (Top Garland) */
+.toran-css {
     position: absolute; top: 0; left: 0; width: 100%;
-    height: 60px;
-    background-image: url('https://img.freepik.com/free-vector/marigold-flower-garland-mango-leaves-decoration-white-background-diwali-festival-banner-vector-illustration_548887-142.jpg'); /* Traditional Garland Placeholder */
-    background-size: contain;
-    background-repeat: repeat-x;
-    opacity: 0.9;
+    font-size: 24px; color: #ff8c00; letter-spacing: 2px;
+    padding: 5px 0; border-bottom: 2px solid #2d5a27;
+    background: rgba(255, 255, 255, 0.3); z-index: 10;
 }
 
+/* DECORATION: BANANA LEAVES (Sides) */
+.banana-leaf {
+    position: absolute; font-size: 80px; bottom: -10px; z-index: 1; opacity: 0.9;
+}
+.leaf-left { left: -10px; transform: rotate(15deg); }
+.leaf-right { right: -10px; transform: rotate(-15deg) scaleX(-1); }
+
 /* CONTENT STYLING */
-.mantra { color: var(--maroon); font-weight: bold; font-size: 18px; margin-top: 15px; margin-bottom: 15px; display: block; }
-.poem { font-size: 14px; font-style: italic; line-height: 1.6; margin: 20px 0; color: #5d4037; }
-.title-big { font-family: 'Yatra One', cursive; font-size: 38px; line-height: 1.2; margin: 15px 0; }
+.mantra { color: var(--maroon); font-weight: bold; font-size: 18px; margin-top: 15px; margin-bottom: 15px; display: block; position: relative; z-index: 2; }
+.poem { font-size: 14px; font-style: italic; line-height: 1.6; margin: 20px 0; color: #5d4037; position: relative; z-index: 2; }
+.title-big { font-family: 'Yatra One', cursive; font-size: 38px; line-height: 1.2; margin: 15px 0; position: relative; z-index: 2; }
 .event-box { 
     background: rgba(212, 175, 55, 0.1); border-top: 1px solid var(--gold); 
     border-bottom: 1px solid var(--gold); padding: 20px 10px; margin: 25px 0;
+    position: relative; z-index: 2;
 }
 
 /* POLAROID STACK */
-.polaroid-stack { position: relative; height: 260px; width: 220px; margin: 20px auto; z-index: 2; }
+.polaroid-stack { position: relative; height: 260px; width: 220px; margin: 20px auto; z-index: 5; }
 .polaroid {
     position: absolute; top: 0; left: 0; width: 100%; background: white;
     padding: 10px 10px 30px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -112,12 +118,13 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 .polaroid img { width: 100%; height: 180px; object-fit: cover; }
 .polaroid.active { opacity: 1; transform: scale(1) rotate(0deg); z-index: 5; }
 
-.contact-info { margin-top: 30px; font-weight: bold; color: var(--maroon); border-top: 1px dashed var(--gold); padding-top: 15px; }
+.contact-info { margin-top: 30px; font-weight: bold; color: var(--maroon); border-top: 1px dashed var(--gold); padding-top: 15px; position: relative; z-index: 2; }
 
 .btn {
     display: inline-block; background: var(--maroon); color: white;
     padding: 12px 35px; text-decoration: none; border-radius: 50px;
     font-weight: bold; margin-top: 20px; border: 1px solid var(--gold);
+    position: relative; z-index: 10;
 }
 </style>
 </head>
@@ -125,7 +132,7 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 <body>
 
 <audio id="bgMusic" loop preload="auto">
-    <source src="https://www.bensound.com/bensound-music/bensound-india.mp3" type="audio/mpeg">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music-btn" onclick="toggleMusic()" id="mBtn">🔇</button>
@@ -136,10 +143,10 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
         <div class="roll top"></div>
         <div class="scroll">
             <div class="scroll-content">
-                <img src="ganpati.jpeg" style="width:70px;">
+                <img src="ganpati.jpeg" style="width:70px;" alt="Ganpati">
                 <h2 class="foil-text" style="font-family:'Yatra One';">सहर्ष स्वागत</h2>
                 <p>डिसाले कुटुंबियांकडून स्नेहादराचे आमंत्रण...</p>
-                <p>🪔🪔🪔</p>
+                <p>🏮 🏮 🏮</p>
             </div>
         </div>
         <div class="roll bottom"></div>
@@ -148,7 +155,10 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 
 <div id="main">
     <div class="card">
-        <div class="toran"></div>
+        <div class="toran-css">🌼🍃🌼🍃🌼🍃🌼🍃🌼🍃🌼</div>
+
+        <div class="banana-leaf leaf-left">🌿</div>
+        <div class="banana-leaf leaf-right">🌿</div>
 
         <span class="mantra">|| श्री गणेशाय नमः ||</span>
         
@@ -164,9 +174,9 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
         <h1 class="title-big foil-text">वास्तुशांती व गृहप्रवेश</h1>
 
         <div class="polaroid-stack">
-            <div class="polaroid active"><img src="house1.jpg"></div>
-            <div class="polaroid"><img src="house2.jpg"></div>
-            <div class="polaroid"><img src="house3.jpg"></div>
+            <div class="polaroid active"><img src="house1.jpg" alt="House 1"></div>
+            <div class="polaroid"><img src="house2.jpg" alt="House 2"></div>
+            <div class="polaroid"><img src="house3.jpg" alt="House 3"></div>
         </div>
 
         <div class="event-box">
@@ -182,7 +192,7 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
         <p>तरी आपली उपस्थीती प्रार्थनीय आहे..</p>
 
         <div class="contact-info">
-            संपर्क : नागेश दिसले   |   +९१ १२३४५६७८९०
+            संपर्क : नागेश दिसले   |   +९१ ९८९०XXXXXX
         </div>
 
         <a class="btn" href="https://maps.google.com" target="_blank">📍 लोकेशन पहा</a>
@@ -194,11 +204,10 @@ const music = document.getElementById("bgMusic");
 const mBtn = document.getElementById("mBtn");
 
 function initPage() {
+    // Attempt to play music
     music.play().then(() => { 
         mBtn.innerHTML = "🔊"; 
-    }).catch(e => {
-        console.log("Audio blocked - user must interact");
-    });
+    }).catch(err => console.log("Audio play requires user click interaction."));
     
     document.getElementById("startBtn").style.display = "none";
     document.getElementById("scrollIntro").classList.add("open");
@@ -218,6 +227,7 @@ function toggleMusic() {
     else { music.pause(); mBtn.innerHTML = "🔇"; }
 }
 
+// Polaroid Rotation
 let polaroids = document.querySelectorAll(".polaroid");
 let currentP = 0;
 setInterval(() => {
