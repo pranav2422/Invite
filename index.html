@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>वास्तुशांती व गृहप्रवेश निमंत्रण</title>
-<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Marathi&family=Yatra+One&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Marathi&family=Yatra+One&display=swap&subset=devanagari" rel="stylesheet">
 
 <style>
 :root {
@@ -15,7 +16,21 @@
     --foil: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
 }
 
-body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a0202; overflow-x: hidden; color: #4a3728; }
+/* Rendering Fix for Marathi Conjuncts (जोडाक्षरे) */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "deva" 1;
+}
+
+body { 
+    margin: 0; 
+    font-family: 'Tiro Devanagari Marathi', serif; 
+    background: #1a0202; 
+    overflow-x: hidden; 
+    color: #4a3728; 
+}
 
 /* AUDIO CONTROL */
 .music-btn {
@@ -28,9 +43,12 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 
 /* GOLD FOIL ANIMATION */
 .foil-text {
-    background: var(--foil); -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; background-size: 200% auto;
+    background: var(--foil);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
     animation: shine 3s infinite linear;
+    font-variant-ligatures: common-ligatures;
 }
 @keyframes shine { to { background-position: 200% center; } }
 
@@ -97,13 +115,13 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 .leaf-right { right: -15px; transform: rotate(-15deg) scaleX(-1); }
 
 /* CONTENT STYLING */
-.mantra { color: var(--maroon); font-weight: bold; font-size: 18px; margin: 10px 0; display: block; position: relative; z-index: 2; }
-.poem { font-size: 14px; font-style: italic; line-height: 1.6; margin: 20px 0; color: #5d4037; position: relative; z-index: 2; }
-.title-big { font-family: 'Yatra One', cursive; font-size: 38px; line-height: 1.2; margin: 15px 0; position: relative; z-index: 2; }
+.mantra { color: var(--maroon); font-weight: bold; font-size: 18px; margin: 10px 0; display: block; position: relative; z-index: 2; font-feature-settings: "deva" 1;}
+.poem { font-size: 14px; font-style: italic; line-height: 1.6; margin: 20px 0; color: #5d4037; position: relative; z-index: 2; font-feature-settings: "deva" 1;}
+.title-big { font-family: 'Yatra One', cursive; font-size: 38px; line-height: 1.2; margin: 15px 0; position: relative; z-index: 2; font-feature-settings: "deva" 1;}
 .event-box { 
     background: rgba(212, 175, 55, 0.1); border-top: 1px solid var(--gold); 
     border-bottom: 1px solid var(--gold); padding: 20px 10px; margin: 25px 0;
-    position: relative; z-index: 2;
+    position: relative; z-index: 2; font-feature-settings: "deva" 1;
 }
 
 /* POLAROID STACK */
@@ -116,9 +134,9 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
 .polaroid img { width: 100%; height: 180px; object-fit: cover; }
 .polaroid.active { opacity: 1; transform: scale(1) rotate(0deg); z-index: 5; }
 
-.contact-info { margin-top: 30px; font-weight: bold; color: var(--maroon); border-top: 1px dashed var(--gold); padding-top: 15px; position: relative; z-index: 2; line-height: 1.6; }
+.contact-info { margin-top: 30px; font-weight: bold; color: var(--maroon); border-top: 1px dashed var(--gold); padding-top: 15px; position: relative; z-index: 2; line-height: 1.6; font-feature-settings: "deva" 1;}
 
-.address-box { margin: 15px 0; font-size: 15px; color: #5d4037; position: relative; z-index: 2; }
+.address-box { margin: 15px 0; font-size: 15px; color: #5d4037; position: relative; z-index: 2; font-feature-settings: "deva" 1;}
 
 .btn {
     display: inline-block; background: var(--maroon); color: white;
@@ -144,8 +162,8 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
         <div class="scroll">
             <div class="scroll-content">
                 <img src="ganpati.jpeg" style="width:70px;" alt="Ganpati">
-                <h2 class="foil-text" style="font-family:'Yatra One';">सहर्ष स्वागत</h2>
-                <p>दिसले कुटुंबियांकडून स्नेहादराचे आमंत्रण...</p>
+                <h2 class="foil-text" style="font-family:'Yatra One'; font-size:32px;">सहर्ष स्वागत</h2>
+                <p>दिसले कुटुंबियांकडून सस्नहे आमंत्रण...</p>
                 <p style="font-size: 24px;">🌸 🌸 🌸</p>
             </div>
         </div>
@@ -195,7 +213,7 @@ body { margin: 0; font-family: 'Tiro Devanagari Marathi', serif; background: #1a
             <b>संपर्क -</b> ९१+ ८८०५६९२२०१
         </div>
 
-        <a class="btn" href="https://maps.google.com" target="_blank">📍 लोकेशन पहा</a>
+        <a class="btn" href="https://maps.app.goo.gl/your-actual-link" target="_blank">📍 लोकेशन पहा</a>
     </div>
 </div>
 
