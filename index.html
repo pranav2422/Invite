@@ -6,17 +6,20 @@
 
 <title>वास्तु शांती निमंत्रण</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Marathi&family=Yatra+One&display=swap" rel="stylesheet">
 
 <style>
+:root{
+    --gold:#d4af37;
+}
+
 body{
     margin:0;
     font-family:'Tiro Devanagari Marathi', serif;
     background:linear-gradient(135deg,#5b0f0f,#2c0505);
 }
 
-/* SCROLL INTRO */
+/* ===== SCROLL ===== */
 #scrollIntro{
     position:fixed;
     inset:0;
@@ -24,38 +27,37 @@ body{
     align-items:center;
     justify-content:center;
     background:#2c0505;
-    overflow:hidden;
+    z-index:10;
 }
 
-/* GOLD PARTICLES */
+/* PARTICLES */
 .particles span{
     position:absolute;
-    width:4px;
-    height:4px;
-    background:#d4af37;
+    width:4px;height:4px;
+    background:var(--gold);
     border-radius:50%;
-    opacity:0;
     animation:float 6s linear infinite;
 }
 @keyframes float{
-    0%{transform:translateY(50px);opacity:0}
-    50%{opacity:1}
+    0%{transform:translateY(40px);opacity:0}
+    50%{opacity:0.8}
     100%{transform:translateY(-100vh);opacity:0}
 }
 
-/* SCROLL */
+/* SCROLL BOX */
 .scroll{
     width:90%;
-    max-width:400px;
+    max-width:420px;
     height:0;
     background:#fff8e7;
-    border-radius:10px;
+    border-radius:14px;
+    border:2px solid var(--gold);
     overflow:hidden;
-    border:2px solid #d4af37;
-    transition:height 1.8s ease;
+    transition:height 1.6s ease;
+    padding-top:20px; /* FIX spacing */
 }
 
-/* ROLLS */
+/* ROLL */
 .roll{
     position:absolute;
     width:100%;
@@ -63,39 +65,43 @@ body{
     background:linear-gradient(#d4af37,#b8962e);
     border-radius:50%;
 }
-.roll.top{top:50%;}
-.roll.bottom{bottom:50%;}
+.roll.top{top:50%}
+.roll.bottom{bottom:50%}
 
-/* OPEN */
-.open .scroll{height:400px;}
-.open .roll.top{transform:translateY(-200px);transition:1.8s;}
-.open .roll.bottom{transform:translateY(200px);transition:1.8s;}
+.open .scroll{height:380px;}
+.open .roll.top{transform:translateY(-190px);transition:1.6s;}
+.open .roll.bottom{transform:translateY(190px);transition:1.6s;}
 
 /* CONTENT */
 .scroll-content{
     text-align:center;
-    padding:20px;
     opacity:0;
+    padding:20px;
     transition:opacity 1s ease 1s;
 }
-.open .scroll-content{opacity:1;}
+.open .scroll-content{opacity:1}
 
-/* GANPATI */
+/* GANPATI FIX */
 .ganpati{
-    width:70px;
-    margin-bottom:10px;
+    width:80px;
+    display:block;
+    margin:0 auto 15px; /* FIX spacing */
 }
 
-/* HANDWRITTEN STYLE */
+/* HANDWRITTEN */
 .handwritten{
     font-family:'Yatra One', cursive;
     font-size:24px;
 }
 
-/* MAIN PAGE */
+/* ===== MAIN ===== */
 #main{
     display:none;
+    min-height:100vh;
     padding:20px;
+    background:
+        radial-gradient(circle at top, rgba(212,175,55,0.15), transparent 60%),
+        linear-gradient(135deg,#5b0f0f,#2c0505);
 }
 
 /* CARD */
@@ -103,27 +109,59 @@ body{
     max-width:420px;
     margin:auto;
     background:#fff8e7;
-    border-radius:20px;
+    border-radius:18px;
     padding:25px;
-    border:2px solid #d4af37;
+    border:2px solid var(--gold);
     text-align:center;
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
 }
 
-/* SLIDER */
+/* ===== IMAGE FIX (IMPORTANT) ===== */
 .gallery{
     position:relative;
-    height:220px;
+    width:100%;
+    height:240px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#000;
+    border-radius:10px;
     overflow:hidden;
 }
+
 .gallery img{
     position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:contain;
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain; /* FULL IMAGE */
     opacity:0;
     transition:opacity 1s;
 }
-.gallery img.active{opacity:1;}
+
+.gallery img.active{
+    opacity:1;
+}
+
+/* TEXT */
+p{
+    line-height:1.7;
+    color:#4b2e2e;
+}
+
+h2{
+    margin:10px 0;
+}
+
+/* BUTTON */
+.btn{
+    margin-top:12px;
+    padding:10px 18px;
+    border-radius:25px;
+    border:1px solid var(--gold);
+    text-decoration:none;
+    color:#4b2e2e;
+    display:inline-block;
+}
 
 </style>
 </head>
@@ -133,18 +171,15 @@ body{
 <!-- SCROLL INTRO -->
 <div id="scrollIntro">
 
-<!-- PARTICLES -->
 <div class="particles">
-<span style="left:10%"></span>
-<span style="left:30%"></span>
-<span style="left:50%"></span>
+<span style="left:15%"></span>
+<span style="left:40%"></span>
 <span style="left:70%"></span>
-<span style="left:90%"></span>
 </div>
 
 <div class="roll top"></div>
 
-<div class="scroll" id="scrollBox">
+<div class="scroll">
 <div class="scroll-content">
 
 <img src="ganpati.jpeg" class="ganpati">
@@ -183,20 +218,22 @@ body{
 
 <p>📍 आपला पत्ता येथे</p>
 
+<a class="btn" href="https://www.google.com/maps?q=your+address" target="_blank">
+लोकेशन पहा
+</a>
+
 </div>
 </div>
 
 <script>
-/* SCROLL OPEN */
 setTimeout(()=>{
 document.getElementById("scrollIntro").classList.add("open");
 },300);
 
-/* SWITCH PAGE */
 setTimeout(()=>{
 document.getElementById("scrollIntro").style.display="none";
 document.getElementById("main").style.display="block";
-},3500);
+},3300);
 
 /* SLIDER */
 let slides=document.querySelectorAll("#gallery img");
